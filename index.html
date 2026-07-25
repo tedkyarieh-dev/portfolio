@@ -871,7 +871,8 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
       activeVideo = null;
       if(item.type === 'video'){
         var v = document.createElement('video');
-        v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'metadata';
+        v.muted = true; v.loop = true; v.playsInline = true; v.autoplay = true; v.preload = 'auto';
+        v.poster = item.poster || item.src.replace('videos/', 'images/posters/').replace(/\.mp4$/, '.jpg');
         var s = document.createElement('source'); s.src = item.src; s.type = 'video/mp4';
         v.appendChild(s);
         next.appendChild(v);
