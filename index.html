@@ -87,12 +87,7 @@ a { color: inherit; }
 .astat:first-child { border-left: none; }
 .astat .v { font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: clamp(26px, 3.6vw, 42px); color: var(--gold); line-height: 1; font-variant-numeric: tabular-nums; }
 .astat .l { font-size: 11px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 9px; }
-.authority-scroll { position: absolute; bottom: 34px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--ink-3); text-decoration: none; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; transition: color .25s ease; }
-.authority-scroll:hover, .authority-scroll:focus-visible { color: var(--gold); }
-.authority-scroll svg { animation: bobDown 1.8s ease-in-out infinite; }
-@keyframes bobDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
-@media (max-width: 780px) { .authority-hero { min-height: 84vh; padding: 96px 18px 56px; } .astat { padding: 0 16px 14px; } .astat .v { font-size: 24px; } .authority-scroll { position: static; margin-top: 36px; transform: none; } }
-@media (prefers-reduced-motion: reduce) { .authority-scroll svg { animation: none; } }
+@media (max-width: 780px) { .authority-hero { min-height: 84vh; padding: 96px 18px 56px; } .astat { padding: 0 16px 14px; } .astat .v { font-size: 24px; } }
 
 /* ---------- BIG STAT BAND (Stripe-style, shared) ---------- */
 .stat-band { display: flex; flex-wrap: wrap; justify-content: center; text-align: center; gap: 0; padding: 64px 0; }
@@ -306,7 +301,7 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
   filter: blur(40px); animation: auroraDrift 22s ease-in-out infinite alternate; pointer-events: none; z-index: 0; }
 @keyframes auroraDrift { 0% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(-2%,2%,0) scale(1.08); } 100% { transform: translate3d(2%,-2%,0) scale(1.02); } }
 @media (prefers-reduced-motion: reduce) { .authority-hero::before { animation: none; } }
-.authority-content, .authority-scroll, .authority-glow { position: relative; z-index: 1; }
+.authority-content, .authority-glow { position: relative; z-index: 1; }
 
 /* Recruiter status pill in nav */
 .status-pill { display: flex; align-items: center; gap: 7px; font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; padding: 6px 12px; backdrop-filter: saturate(1.4) blur(var(--glass-blur)); box-shadow: inset 0 1px 0 var(--glass-highlight); margin-left: 18px; }
@@ -381,10 +376,6 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
         <div class="astat"><div class="v">57%</div><div class="l">Discovery Reach</div></div>
       </div>
     </div>
-    <a class="authority-scroll" href="#work" aria-label="Scroll to featured work">
-      <span>Featured Work</span>
-      <svg width="14" height="20" viewBox="0 0 14 20" fill="none"><path d="M7 1v17M1 12l6 6 6-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
   </div>
 
   <div class="hero" id="work">
@@ -486,20 +477,13 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
       <div class="row-head">
         <div>
           <h2 class="row-title">@tedkyarieh_ &mdash; Built From Zero</h2>
-          <p class="row-sub">Top-ranked posts, trailing 90 days</p>
+          <p class="row-sub">Every post ranked by real view count, live from Instagram</p>
         </div>
       </div>
-      <div class="row-scroll" id="rowPersonal"></div>
-    </section>
-
-    <section class="row-section" id="campaign-personal-alltime">
-      <div class="row-head">
-        <div>
-          <h2 class="row-title">@tedkyarieh_ &mdash; All-Time Best</h2>
-          <p class="row-sub">Outside the 90-day window above, but the two biggest posts on either account, ever</p>
-        </div>
-      </div>
+      <p class="campaign-eyebrow" style="margin:0 0 12px;">All-Time Best &middot; outside the 90-day window, but the two biggest posts ever</p>
       <div class="row-scroll" id="rowPersonalAllTime"></div>
+      <p class="campaign-eyebrow" style="margin:26px 0 12px;">Trailing 90 Days &middot; top-ranked, most recent</p>
+      <div class="row-scroll" id="rowPersonal"></div>
     </section>
 
     <section class="row-section" id="craft">
@@ -558,7 +542,8 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
       <h2 class="section-title">If your brand deserves more than <span class="accent-word">pretty posts</span>&mdash;</h2>
       <p>Let's build something people actually remember. Two accounts, one repeatable system, 10M+ organic views to show for it &mdash; open to social media management, content creation and brand partnerships, automotive or otherwise.</p>
       <div class="closing-actions">
-        <a class="btn-play" href="https://claude.ai/code/artifact/d72b052d-f2b5-4e3e-bca4-d8241d48fcbe" target="_blank" rel="noopener">Download CV</a>
+        <a class="btn-play" href="cv/Ted_Kiarie_Njuguna_CV_Porsche_CPM_Intern.docx" download>CV &mdash; CPM Intern</a>
+        <a class="btn-play" href="cv/Ted_Kiarie_Njuguna_CV_Porsche_MarketingComms_Intern.docx" download>CV &mdash; Marketing/Comms Intern</a>
         <a class="btn-info" href="https://linkedin.com/in/ted-kyarieh/" target="_blank" rel="noopener">See LinkedIn</a>
         <a class="btn-info" href="#contact">Contact Details &#8595;</a>
       </div>
@@ -571,7 +556,8 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
         <a href="tel:+254792201569">+254 792 201 569</a>
         <a href="https://linkedin.com/in/ted-kyarieh/">LinkedIn</a>
         <a href="https://instagram.com/tedkyarieh_">@tedkyarieh_</a>
-        <a href="https://claude.ai/code/artifact/d72b052d-f2b5-4e3e-bca4-d8241d48fcbe">Full CV &rarr;</a>
+        <a href="cv/Ted_Kiarie_Njuguna_CV_Porsche_CPM_Intern.docx" download>CV, CPM Intern &rarr;</a>
+        <a href="cv/Ted_Kiarie_Njuguna_CV_Porsche_MarketingComms_Intern.docx" download>CV, Marketing/Comms &rarr;</a>
       </div>
     </footer>
 
@@ -857,7 +843,6 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
 
   function initTileLoop(container, playlist){
     if(!container || !playlist || !playlist.length) return null;
-    var loopReduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var layerA = document.createElement('div'); layerA.className = 'tile-loop-layer active';
     var layerB = document.createElement('div'); layerB.className = 'tile-loop-layer';
     container.appendChild(layerA); container.appendChild(layerB);
@@ -877,7 +862,7 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
         v.appendChild(s);
         next.appendChild(v);
         activeVideo = v;
-        if(inView && !loopReduceMotion && !paused) v.play().catch(function(){});
+        if(inView && !paused) v.play().catch(function(){});
       } else {
         next.style.backgroundImage = 'url(' + item.src + ')';
         if(item.fit) next.style.backgroundSize = item.fit;
@@ -889,7 +874,7 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
     paint(playlist[0]);
 
     function scheduleNext(){
-      if(loopReduceMotion || playlist.length < 2 || paused) return;
+      if(playlist.length < 2 || paused) return;
       timerId = setTimeout(function(){
         idx = (idx + 1) % playlist.length;
         paint(playlist[idx]);
@@ -927,13 +912,11 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
     { type:'video', src:'videos/hero-mascardi.mp4', duration:15000 }
   ];
   var heroLoopCtrl = initTileLoop(document.getElementById('heroVideo'), HERO_LOOP);
-  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var playing = !reduceMotion;
+  var playing = true;
   var playToggle = document.getElementById('heroPlayToggle');
 
-  playToggle.textContent = playing ? '❬❬' : '▶';
-  playToggle.setAttribute('aria-label', playing ? 'Pause background video' : 'Play background video');
-  if (!playing && heroLoopCtrl) { heroLoopCtrl.pause(); }
+  playToggle.textContent = '❬❬';
+  playToggle.setAttribute('aria-label', 'Pause background video');
 
   playToggle.addEventListener('click', function(){
     playing = !playing;
