@@ -74,6 +74,8 @@ a { color: inherit; }
 
 /* ---------- AUTHORITY HERO ---------- */
 .authority-hero { position: relative; overflow: hidden; min-height: 92vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 130px 24px 70px; background: radial-gradient(circle at 50% 15%, #1c1712 0%, var(--bg) 62%); }
+.authority-video { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
+.authority-scrim { position: absolute; inset: 0; z-index: 0; background: radial-gradient(circle at 50% 15%, rgba(28,23,18,0.5) 0%, rgba(10,9,8,0.85) 55%, rgba(10,9,8,0.94) 100%); pointer-events: none; }
 .authority-glow { position: absolute; inset: -30% -10% auto auto; width: 75%; height: 85%; background: radial-gradient(circle at 60% 30%, var(--accent-soft), transparent 65%); pointer-events: none; }
 .authority-content { position: relative; max-width: 920px; }
 .authority-eyebrow { display: inline-flex; align-items: center; gap: 9px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin: 0 0 28px; }
@@ -132,10 +134,7 @@ a { color: inherit; }
 @media (max-width: 780px) { .hero { padding: 0 10px; } }
 .hero-card { position: relative; border-radius: 18px; overflow: hidden; min-height: 82vh; display: flex; align-items: flex-end; background: #050403; box-shadow: 0 30px 60px var(--shadow); }
 @media (max-width: 780px) { .hero-card { min-height: 90vh; border-radius: 12px; } }
-.hero-bg-layer { position: absolute; inset: 0; background: #050403 center/cover no-repeat; opacity: 0; transition: opacity 1.1s ease; transform: scale(1.0); }
-.hero-bg-layer.active { opacity: 1; animation: heroDrift 16s ease-in-out infinite alternate; }
-@keyframes heroDrift { from { transform: scale(1.0); } to { transform: scale(1.06); } }
-@media (prefers-reduced-motion: reduce) { .hero-bg-layer.active { animation: none; } }
+.hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #050403; }
 .hero-scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,4,3,0.97) 4%, rgba(5,4,3,0.6) 42%, rgba(5,4,3,0.12) 72%), linear-gradient(to right, rgba(5,4,3,0.8) 0%, rgba(5,4,3,0.1) 58%); }
 .hero-glow { position: absolute; inset: -20% -10% auto auto; width: 60%; height: 70%; background: radial-gradient(circle at 70% 30%, var(--accent-soft), transparent 65%); pointer-events: none; }
 .hero-content { position: relative; padding: 60px 56px 54px; max-width: 700px; }
@@ -143,13 +142,10 @@ a { color: inherit; }
 .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin: 0 0 16px; }
 .hero-eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex: none; }
 h1.hero-title { font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: clamp(34px, 5.8vw, 66px); line-height: 0.96; letter-spacing: -0.005em; text-transform: uppercase; margin: 0 0 6px; color: #fff; text-wrap: balance; }
-.hero-episode { font-family: 'IBM Plex Sans', sans-serif; font-weight: 600; font-size: 16.5px; color: #e7e4da; margin: 0 0 18px; }
-.hero-episode b { color: var(--gold); font-weight: 600; }
 .hero-logline { font-size: 15.5px; line-height: 1.62; color: #cfccc0; max-width: 56ch; margin: 0 0 26px; min-height: 4.9em; }
 .hero-stats { display: flex; flex-wrap: wrap; gap: 26px 34px; margin: 0 0 30px; }
 .hero-stat .v { font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 21px; color: var(--gold); font-variant-numeric: tabular-nums; line-height: 1.1; }
 .hero-stat .l { font-size: 10.5px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; }
-.hero-stat.category .v { color: #fff; font-family: 'IBM Plex Sans', sans-serif; font-weight: 700; font-size: 15px; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
 .btn-play { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: var(--accent-ink); border: none; border-radius: 6px; font-family: 'IBM Plex Sans', sans-serif; font-weight: 700; font-size: 15px; padding: 12px 22px; cursor: pointer; text-decoration: none; transition: transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s ease, filter .25s ease; }
 .btn-play:hover, .btn-play:focus-visible { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(226,53,43,0.35); }
@@ -158,9 +154,6 @@ h1.hero-title { font-family: 'Big Shoulders Display', sans-serif; font-weight: 8
 
 .hero-controls { position: absolute; right: 24px; bottom: 30px; display: flex; align-items: center; gap: 16px; z-index: 3; }
 @media (max-width: 780px) { .hero-controls { right: 16px; bottom: 18px; } }
-.hero-dots { display: flex; flex-direction: column; gap: 8px; }
-.hero-dot { width: 22px; height: 3px; border-radius: 2px; background: rgba(255,255,255,0.32); border: none; padding: 0; cursor: pointer; }
-.hero-dot.active { background: var(--accent); width: 30px; }
 .hero-playtoggle { width: 34px; height: 34px; border-radius: 50%; background: var(--glass-bg); border: 1px solid var(--glass-border); color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 13px; backdrop-filter: saturate(1.4) blur(var(--glass-blur)); box-shadow: inset 0 1px 0 var(--glass-highlight); transition: transform .2s ease, background .2s ease; }
 .hero-playtoggle:hover, .hero-playtoggle:focus-visible { background: rgba(60,56,50,0.6); transform: scale(1.08); }
 
@@ -182,9 +175,13 @@ h2.row-title { font-family: 'Big Shoulders Display', sans-serif; font-weight: 70
 .campaign-img { position: absolute; inset: 0; background: var(--surface) center/cover no-repeat; transition: transform 5s cubic-bezier(.25,.1,.25,1); }
 .campaign-card:hover .campaign-img, .campaign-card:focus-visible .campaign-img { transform: scale(1.1); transition-duration: 6s; }
 .campaign-scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,4,3,0.94) 8%, rgba(5,4,3,0.5) 46%, rgba(5,4,3,0.05) 78%); }
+.tile-loop-layer { position: absolute; inset: 0; background: var(--surface) center/cover no-repeat; opacity: 0; transition: opacity 1s ease; }
+.tile-loop-layer.active { opacity: 1; }
+.tile-loop-layer video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .campaign-body { position: relative; padding: 34px 36px 36px; width: 100%; }
 .campaign-eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin: 0 0 10px; }
 .campaign-title { font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: clamp(22px, 3vw, 30px); text-transform: uppercase; color: #fff; margin: 0 0 12px; line-height: 1.02; }
+.campaign-handle { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--ink-3); margin: -8px 0 12px; }
 .campaign-desc { font-size: 13.5px; line-height: 1.55; color: #d7d4c9; margin: 0 0 22px; max-width: 42ch; }
 .campaign-stats { display: flex; gap: 32px; flex-wrap: wrap; }
 .campaign-stats .v { font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 15px; color: var(--gold); font-variant-numeric: tabular-nums; }
@@ -202,8 +199,6 @@ h2.row-title { font-family: 'Big Shoulders Display', sans-serif; font-weight: 70
 .tile-scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.45) 38%, rgba(0,0,0,0.02) 62%); }
 .tile-badge { position: absolute; top: 10px; left: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; font-weight: 600; letter-spacing: 0.04em; background: var(--accent); color: var(--accent-ink); border-radius: 4px; padding: 3px 7px; text-transform: uppercase; }
 .tile-info-icon { position: absolute; top: 9px; right: 9px; width: 24px; height: 24px; border-radius: 50%; background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.35); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; opacity: 0; transition: opacity .2s ease; }
-.ext-tile { text-decoration: none; color: inherit; display: block; }
-.ext-tile .tile-info-icon { opacity: 1; background: var(--glass-bg); backdrop-filter: saturate(1.4) blur(var(--glass-blur)); font-size: 13px; }
 .tile:hover .tile-info-icon, .tile:focus-visible .tile-info-icon { opacity: 1; }
 .tile-body { position: absolute; left: 0; right: 0; bottom: 0; padding: 12px 12px 13px; }
 .tile-title { font-size: 12.5px; font-weight: 700; color: #fff; line-height: 1.28; margin: 0 0 5px; }
@@ -222,6 +217,7 @@ h2.row-title { font-family: 'Big Shoulders Display', sans-serif; font-weight: 70
 .modal { width: 100%; max-width: 640px; max-height: 88vh; overflow-y: auto; background: rgba(34,30,26,0.86); border-radius: 14px; border: 1px solid var(--glass-border); box-shadow: inset 0 1px 0 var(--glass-highlight), 0 40px 80px rgba(0,0,0,0.6); backdrop-filter: saturate(1.5) blur(var(--glass-blur)); }
 .modal-media { position: relative; aspect-ratio: 16/9; background: #050403 center/cover no-repeat; }
 .modal-media .scrim { position: absolute; inset: 0; background: linear-gradient(to top, var(--surface-raised) 2%, rgba(0,0,0,0.15) 55%, transparent 80%); }
+.modal-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #050403; }
 .modal-close { position: absolute; top: 14px; right: 14px; width: 34px; height: 34px; border-radius: 50%; background: var(--glass-bg); border: 1px solid var(--glass-border); color: #fff; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; backdrop-filter: saturate(1.4) blur(var(--glass-blur)); box-shadow: inset 0 1px 0 var(--glass-highlight); transition: transform .2s ease, background .2s ease; }
 .modal-close:hover, .modal-close:focus-visible { background: rgba(60,56,50,0.7); transform: scale(1.08); }
 .modal-media .modal-title-ov { position: absolute; left: 26px; bottom: 18px; right: 26px; font-family: 'Big Shoulders Display', sans-serif; font-weight: 800; font-size: clamp(21px, 3.8vw, 30px); text-transform: uppercase; color: #fff; line-height: 1.02; }
@@ -271,6 +267,10 @@ h2.row-title { font-family: 'Big Shoulders Display', sans-serif; font-weight: 70
 .mp-step .act { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin: 0 0 6px; }
 .mp-step h3 { font-family: 'Big Shoulders Display', sans-serif; font-weight: 700; font-size: 21px; text-transform: uppercase; color: var(--ink-1); margin: 0 0 8px; }
 .mp-step p { font-size: 14.5px; line-height: 1.7; color: var(--ink-2); margin: 0; max-width: 62ch; }
+.mp-pillars { margin-top: 44px; padding-top: 40px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 32px; }
+.mp-pillar-eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin: 0 0 4px; }
+.mp-pillar-tagline { font-size: 13px; color: var(--ink-3); margin: 0 0 14px; }
+.mp-pillar .row-scroll { padding: 6px 4px 10px; margin: 0 -4px; }
 .mp-cta { display: inline-flex; margin-top: 44px; color: var(--gold); text-decoration: none; font-size: 13.5px; border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
 .mp-cta:hover, .mp-cta:focus-visible { color: var(--accent); border-bottom-color: var(--accent); }
 
@@ -367,6 +367,8 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
   </nav>
 
   <div class="authority-hero" id="authorityHero">
+    <div class="authority-video" id="authorityVideo" aria-hidden="true"></div>
+    <div class="authority-scrim" aria-hidden="true"></div>
     <div class="authority-glow" aria-hidden="true"></div>
     <div class="authority-content">
       <p class="authority-eyebrow"><span class="dot"></span>Creative Strategist &middot; Social Growth &middot; Automotive Storytelling</p>
@@ -387,24 +389,25 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
 
   <div class="hero" id="work">
     <div class="hero-card" id="heroCard">
-      <div class="hero-bg-layer active" id="heroBgA"></div>
-      <div class="hero-bg-layer" id="heroBgB"></div>
+      <div class="hero-video" id="heroVideo" aria-hidden="true"></div>
       <div class="hero-glow"></div>
       <div class="hero-scrim"></div>
       <div class="hero-content">
-        <p class="hero-eyebrow"><span class="dot"></span><span id="heroEyebrow">Featured Work</span></p>
+        <p class="hero-eyebrow"><span class="dot"></span>Featured Work</p>
         <h1 class="hero-title">Mascardi Luxury Cars</h1>
-        <p class="hero-episode" id="heroEpisode"></p>
-        <p class="hero-logline" id="heroLogline"></p>
-        <div class="hero-stats" id="heroStats"></div>
+        <p class="hero-logline">Grew Instagram from 56K to 70.9K followers in five months &mdash; discovery, not an inherited audience. Every reel, carousel and delivery story shot, edited and posted end to end.</p>
+        <div class="hero-stats" id="heroStats">
+          <div class="hero-stat"><div class="v">5.01M</div><div class="l">Views / 5mo</div></div>
+          <div class="hero-stat"><div class="v">303</div><div class="l">Pieces Produced</div></div>
+          <div class="hero-stat"><div class="v">57%</div><div class="l">Non-Follower Reach</div></div>
+        </div>
         <div class="hero-actions">
           <a class="btn-play" href="#campaigns">&#9654; View Campaigns</a>
           <a class="btn-info" href="#skills">&#43; Capabilities</a>
         </div>
       </div>
       <div class="hero-controls">
-        <div class="hero-dots" id="heroDots"></div>
-        <button class="hero-playtoggle" id="heroPlayToggle" aria-label="Pause episode autoplay">&#10073;&#10073;</button>
+        <button class="hero-playtoggle" id="heroPlayToggle" aria-label="Pause background video">&#10073;&#10073;</button>
       </div>
     </div>
   </div>
@@ -434,14 +437,15 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
             <a class="campaign-jump" href="#campaign-mascardi" onclick="event.stopPropagation()">Jump to the posts &darr;</a>
           </div>
         </div>
-        <div class="campaign-card" id="cardPersonal" data-movie="personal" tabindex="0" role="button" aria-label="Open @tedkyarieh_ case study">
+        <div class="campaign-card" id="cardPersonal" data-movie="personal" tabindex="0" role="button" aria-label="Open Built From Zero (@tedkyarieh_) case study">
           <div class="campaign-img"></div>
           <div class="campaign-scrim"></div>
           <div class="campaign-arrow" aria-hidden="true">&#9654;</div>
           <div class="campaign-body">
             <p class="campaign-eyebrow">Independent &middot; 2025&ndash;Present</p>
-            <h3 class="campaign-title">@tedkyarieh_</h3>
-            <p class="campaign-desc">Built from zero, no inherited following &mdash; proof the playbook travels.</p>
+            <h3 class="campaign-title">Built From Zero</h3>
+            <p class="campaign-handle">@tedkyarieh_</p>
+            <p class="campaign-desc">No inherited following, no dealership brand &mdash; proof the playbook travels beyond one account.</p>
             <div class="campaign-stats">
               <div><div class="v">5.54M</div><div class="l">Views / 90d</div></div>
               <div><div class="v">+40%</div><div class="l">Reach, QoQ</div></div>
@@ -516,7 +520,7 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
         </div>
       </div>
       <p class="campaign-eyebrow" style="margin:-6px 0 16px;">Freelance Video Production &amp; Editing &middot; Jun 2026</p>
-      <p class="campaign-desc" style="max-width:760px; margin:0 0 22px;">Shot, edited and produced marketing video content for a launch event at Masshouse on 27 June 2026, run by Sedana in partnership with Jgadget Solaaris and Harriet Bella. Tiles link to the raw footage &mdash; Sedana doesn't have a live public feed yet.</p>
+      <p class="campaign-desc" style="max-width:760px; margin:0 0 22px;">Shot, edited and produced marketing video content for a launch event at Masshouse on 27 June 2026, run by Sedana in partnership with Jgadget Solaaris and Harriet Bella. Tap a tile to watch the clip.</p>
       <div class="row-scroll" id="rowSedana"></div>
     </section>
 
@@ -592,6 +596,19 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
     </div>
   </div>
 
+  <div class="modal-overlay" id="videoModalOverlay">
+    <div class="modal" id="videoModalCard" role="dialog" aria-modal="true">
+      <div class="modal-media" id="videoModalMedia"></div>
+      <div class="modal-body">
+        <div class="modal-row1">
+          <span class="modal-ribbon">Sedana</span>
+          <span class="modal-tag" id="videoModalTag"></span>
+        </div>
+        <p class="modal-synopsis" id="videoModalBrief"></p>
+      </div>
+    </div>
+  </div>
+
   <div class="moviepage-overlay" id="moviepageOverlay">
     <div class="moviepage" id="moviepageCard" role="dialog" aria-modal="true" aria-labelledby="mpTitle">
       <button class="moviepage-close" id="moviepageClose" aria-label="Close case study">&#10005;</button>
@@ -606,6 +623,7 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
       </div>
       <div class="mp-body">
         <div class="mp-arc" id="mpArc"></div>
+        <div class="mp-pillars" id="mpPillars"></div>
         <a class="mp-cta" id="mpCta" href="#top">See every post in this campaign &darr;</a>
       </div>
     </div>
@@ -638,6 +656,39 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
       synopsis:"The entire Porsche selection sold through — a plain sell-out announcement that still cracked the top 5 by views.",
       stats:[["7.5K","Views"],["3.3K","Reach"],["141","Likes"]],
       month:"July", ep:5, subtitle:"Fully Sold Out — Carousel", permalink:"https://www.instagram.com/p/Da3RROMjZhr/" },
+    hum1: { title:"Gen Z Forgot To Lock In At Work", ribbon:"Skit", tag1:"Reel", tag2:"Mascardi Luxury Cars",
+      synopsis:"A pure relatability skit — no product pitch, no CTA — that became Mascardi's biggest post by a wide margin.",
+      stats:[["342K","Views"],["198K","Reach"],["33.8K","Likes"]],
+      permalink:"https://www.instagram.com/reel/DaiTcf6tQ9Q/",
+      reelMetrics:{saved:876, shares:4229}, note:"No dialogue, no sales pitch — pure relatability. 4.2K shares suggest it traveled well past Mascardi's own following." },
+    hum2: { title:"Guess Everyone Should Mind Their Business", ribbon:"Skit", tag1:"Reel", tag2:"Mascardi Luxury Cars",
+      synopsis:"Light showroom humor with zero hard sell — built for shares over specs.",
+      stats:[["12.0K","Views"],["7.9K","Reach"],["438","Likes"]],
+      permalink:"https://www.instagram.com/reel/DaTBl6OtY2F/" },
+    hum3: { title:"Please Don't Open The Trunk", ribbon:"Skit", tag1:"Reel", tag2:"Mascardi Luxury Cars",
+      synopsis:"A showroom in-joke turned into a quick punchline reel.",
+      stats:[["4.7K","Views"],["3.4K","Reach"],["136","Likes"]],
+      permalink:"https://www.instagram.com/reel/DaKoMf5tknv/" },
+    del1: { title:"Porsche Cayenne S Chrono — Sold in 2 Days", ribbon:"Delivery", tag1:"Carousel", tag2:"Mascardi Luxury Cars",
+      synopsis:"Two days into the Mid Year Sale and this Cayenne was already off the market — urgency baked into the caption, not just the offer.",
+      stats:[["6.8K","Reach"],["340","Likes"],["25","Shares"]],
+      permalink:"https://www.instagram.com/p/DaSZQWKjYQo/" },
+    com1: { title:"This Week's Recap — Mascardi Family", ribbon:"Community", tag1:"Carousel", tag2:"Mascardi Luxury Cars",
+      synopsis:"Behind-the-scenes recap format: deliveries, late nights, the team — the human side of the dealership, not just the inventory.",
+      stats:[["2.6K","Reach"],["134","Likes"],["3","Saves"]],
+      permalink:"https://www.instagram.com/p/DaIh81EDbBS/" },
+    com2: { title:"Some Of Our Ladies", ribbon:"Community", tag1:"Reel", tag2:"Mascardi Luxury Cars",
+      synopsis:"Team-culture content — putting faces to the brand instead of only the cars.",
+      stats:[["5.0K","Views"],["3.6K","Reach"],["173","Likes"]],
+      permalink:"https://www.instagram.com/reel/DadHCZNNZRb/" },
+    com3: { title:"Dear Bruce…", ribbon:"Community", tag1:"Reel", tag2:"Mascardi Luxury Cars",
+      synopsis:"An inside joke turned into a recurring bit the audience started following.",
+      stats:[["5.2K","Views"],["3.8K","Reach"],["277","Likes"]],
+      permalink:"https://www.instagram.com/reel/DaK-_AQtk1D/" },
+    rev1: { title:"BMW 320i Review, Mascardi Style", ribbon:"Review", tag1:"Reel", tag2:"Mascardi Luxury Cars",
+      synopsis:"A straight spec review with the brand's own voice mixed in — proof the content can educate and still sound like Mascardi.",
+      stats:[["6.5K","Views"],["4.6K","Reach"],["285","Likes"]],
+      permalink:"https://www.instagram.com/reel/Dap0iWfN9bv/" },
     p1: { title:"I Know I'm Not The Only One", ribbon:"🏆 #1 Most Viewed", tag1:"Reel", tag2:"@tedkyarieh_",
       synopsis:"The single biggest post on either account — 1.03M views and 41.6K likes, pure car-culture relatability with zero paid promotion behind it.",
       stats:[["1.03M","Views"],["778K","Reach"],["41.6K","Likes"]], date:"2026-05-21", dateLabel:"21 May",
@@ -659,10 +710,11 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
       permalink:"https://www.instagram.com/reel/DZUZsjrI9vC/",
       reelMetrics:{watch:"8.1s", saved:74, shares:111}, note:"No punchline, no hook line — just the drive itself. Proof the format carries without a gimmick." }
   };
+  // Drop compressed clips in videos/sedana-{key}.mp4 — plays inline via the video modal below, no code changes needed.
   var SEDANA = [
-    { key:"sed2", title:"Harriet Bella", subtitle:"Sedana — Masshouse Launch Event · 27 June 2026", driveUrl:"https://drive.google.com/file/d/16sZhoM7eGMInbd_4dKeRy0EfQ3wk4XI6/view" },
-    { key:"sed1", title:"Jgadget Solaaris", subtitle:"Sedana — Masshouse Launch Event · 27 June 2026", driveUrl:"https://drive.google.com/file/d/1xbDoBb9NwDNbuG2zL2YN_BfG1J7Q7iWn/view" },
-    { key:"sed3", title:"Solaariss", subtitle:"Sedana — Masshouse Launch Event · 27 June 2026", driveUrl:"https://drive.google.com/file/d/1F_11Xrt7YKIRlnA_sw7T3XNBwapgExf3/view" }
+    { key:"sed2", title:"Harriet Bella", subtitle:"Sedana — Masshouse Launch Event · 27 June 2026", role:"Freelance Video Production & Editing · Jun 2026", brief:"Event coverage from Sedana's Masshouse launch, in partnership with Jgadget Solaaris and Harriet Bella.", videoSrc:"videos/sedana-sed2.mp4" },
+    { key:"sed1", title:"Jgadget Solaaris", subtitle:"Sedana — Masshouse Launch Event · 27 June 2026", role:"Freelance Video Production & Editing · Jun 2026", brief:"Event coverage from Sedana's Masshouse launch, in partnership with Jgadget Solaaris and Harriet Bella.", videoSrc:"videos/sedana-sed1.mp4" },
+    { key:"sed3", title:"Solaariss", subtitle:"Sedana — Masshouse Launch Event · 27 June 2026", role:"Freelance Video Production & Editing · Jun 2026", brief:"Event coverage from Sedana's Masshouse launch, in partnership with Jgadget Solaaris and Harriet Bella.", videoSrc:"videos/sedana-sed3.mp4" }
   ];
 
   
@@ -705,14 +757,14 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
   var rowSed = document.getElementById('rowSedana');
   SEDANA.forEach(function(s){
     rowSed.insertAdjacentHTML('beforeend',
-      '<a class="tile ext-tile" href="'+s.driveUrl+'" target="_blank" rel="noopener" aria-label="'+s.title+' — watch the raw footage on Google Drive, opens in a new tab">'+
+      '<div class="tile" tabindex="0" data-video-key="'+s.key+'" role="button" aria-label="'+s.title+' — play video">'+
       '<div class="tile-img" style="background-image:'+bgUrl(s.key)+'"></div>'+
       '<div class="tile-scrim"></div>'+
       '<div class="tile-badge">Sedana</div>'+
-      '<div class="tile-info-icon">&#8599;</div>'+
+      '<div class="tile-info-icon">&#9654;</div>'+
       '<div class="tile-body"><div class="tile-title">'+s.title+'</div>'+
       '<div class="tile-meta"><span>'+s.subtitle+'</span></div></div>'+
-      '</a>');
+      '</div>');
   });
 
   var LOOP = [
@@ -758,76 +810,107 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
       '<div class="mp-step"><p class="act">'+step.act+'</p><h3>'+step.h+'</h3><p>'+step.p+'</p></div>');
   });
 
-  // Campaign overview cards reuse already-embedded tile images (no duplicate payload)
-  document.querySelector('#cardMascardi .campaign-img').style.backgroundImage = bgUrl('m5');
+  // Personal campaign card reuses an already-embedded tile image (no duplicate payload)
   document.querySelector('#cardPersonal .campaign-img').style.backgroundImage = bgUrl('p1');
 
-  // ---------- Hero episode carousel ----------
-  var SLIDE_KEYS = ['m1','m2','m3','m4','m5'];
-  var slideIdx = 0;
-  var bgA = document.getElementById('heroBgA'), bgB = document.getElementById('heroBgB');
-  var usingA = true;
-  var heroEyebrow = document.getElementById('heroEyebrow');
-  var heroEpisode = document.getElementById('heroEpisode');
-  var heroLogline = document.getElementById('heroLogline');
-  var heroStats = document.getElementById('heroStats');
-  var heroDots = document.getElementById('heroDots');
+  // ---------- Mascardi tile media-loop (blend of cinematic video and carousel stills) ----------
+  var MASCARDI_LOOP = [
+    { type:'video', src:'videos/mascardi-tile-1.mp4', duration:5000 },
+    { type:'image', src:'images/m5.jpg', duration:4000 },
+    { type:'video', src:'videos/mascardi-tile-2.mp4', duration:5000 },
+    { type:'image', src:'images/delimg1.jpg', duration:4000 },
+    { type:'video', src:'videos/mascardi-tile-3.mp4', duration:5000 },
+    { type:'image', src:'images/m1.jpg', duration:4000 },
+    { type:'video', src:'videos/mascardi-tile-4.mp4', duration:5000 },
+    { type:'image', src:'images/delimg2.jpg', duration:4000 },
+    { type:'image', src:'images/tileimg1.jpg', duration:4000 },
+    { type:'image', src:'images/m3.jpg', duration:4000 },
+    { type:'image', src:'images/delimg3.jpg', duration:4000 },
+    { type:'image', src:'images/m4.jpg', duration:4000 }
+  ];
 
-  SLIDE_KEYS.forEach(function(k, i){
-    var b = document.createElement('button');
-    b.className = 'hero-dot' + (i === 0 ? ' active' : '');
-    b.setAttribute('aria-label', 'Go to ' + DATA[k].month + ' episode');
-    b.addEventListener('click', function(){ showSlide(i, true); });
-    heroDots.appendChild(b);
-  });
+  function initTileLoop(container, playlist){
+    if(!container || !playlist || !playlist.length) return null;
+    var loopReduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var layerA = document.createElement('div'); layerA.className = 'tile-loop-layer active';
+    var layerB = document.createElement('div'); layerB.className = 'tile-loop-layer';
+    container.appendChild(layerA); container.appendChild(layerB);
+    var usingLayerA = true, idx = 0, activeVideo = null, inView = true, paused = false, timerId = null;
 
-  function paintSlide(key){
-    var d = DATA[key];
-    heroEyebrow.textContent = d.ribbon.replace('🏆 ','') + ' — Featured Work';
-    heroEpisode.innerHTML = d.subtitle;
-    heroLogline.textContent = d.synopsis;
-    heroStats.innerHTML = d.stats.map(function(s){
-      return '<div class="hero-stat"><div class="v">'+s[0]+'</div><div class="l">'+s[1]+'</div></div>';
-    }).join('') + '<div class="hero-stat category"><div class="v">Automotive</div><div class="l">Luxury</div></div>';
-    var next = usingA ? bgB : bgA;
-    var prev = usingA ? bgA : bgB;
-    next.style.backgroundImage = bgUrl(key);
-    next.classList.add('active');
-    prev.classList.remove('active');
-    usingA = !usingA;
+    function paint(item){
+      var next = usingLayerA ? layerB : layerA, prev = usingLayerA ? layerA : layerB;
+      next.innerHTML = '';
+      next.style.backgroundImage = '';
+      next.style.backgroundSize = '';
+      activeVideo = null;
+      if(item.type === 'video'){
+        var v = document.createElement('video');
+        v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'metadata';
+        var s = document.createElement('source'); s.src = item.src; s.type = 'video/mp4';
+        v.appendChild(s);
+        next.appendChild(v);
+        activeVideo = v;
+        if(inView && !loopReduceMotion && !paused) v.play().catch(function(){});
+      } else {
+        next.style.backgroundImage = 'url(' + item.src + ')';
+        if(item.fit) next.style.backgroundSize = item.fit;
+      }
+      next.classList.add('active'); prev.classList.remove('active');
+      usingLayerA = !usingLayerA;
+    }
+
+    paint(playlist[0]);
+
+    function scheduleNext(){
+      if(loopReduceMotion || playlist.length < 2 || paused) return;
+      timerId = setTimeout(function(){
+        idx = (idx + 1) % playlist.length;
+        paint(playlist[idx]);
+        scheduleNext();
+      }, playlist[idx].duration || 5000);
+    }
+    scheduleNext();
+
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          inView = entry.isIntersecting;
+          if(activeVideo){ if(inView && !paused) activeVideo.play().catch(function(){}); else activeVideo.pause(); }
+        });
+      }, { threshold: 0.15 }).observe(container);
+    }
+
+    return {
+      pause: function(){ paused = true; if(timerId){ clearTimeout(timerId); timerId = null; } if(activeVideo) activeVideo.pause(); },
+      resume: function(){ if(!paused) return; paused = false; if(activeVideo && inView) activeVideo.play().catch(function(){}); scheduleNext(); }
+    };
   }
 
-  function showSlide(i, userInitiated){
-    slideIdx = (i + SLIDE_KEYS.length) % SLIDE_KEYS.length;
-    paintSlide(SLIDE_KEYS[slideIdx]);
-    Array.prototype.forEach.call(heroDots.children, function(dot, di){
-      dot.classList.toggle('active', di === slideIdx);
-    });
-    if (userInitiated) restartAutoplay();
-  }
+  initTileLoop(document.querySelector('#cardMascardi .campaign-img'), MASCARDI_LOOP);
 
-  paintSlide(SLIDE_KEYS[0]);
+  // ---------- Authority hero video (the "introduces Ted" intro section) ----------
+  var AUTHORITY_LOOP = [
+    { type:'video', src:'videos/authority-hero.mp4', duration:8000 }
+  ];
+  initTileLoop(document.getElementById('authorityVideo'), AUTHORITY_LOOP);
 
+  // ---------- Hero background video (Mascardi — plays in full, single clip) ----------
+  var HERO_LOOP = [
+    { type:'video', src:'videos/hero-mascardi.mp4', duration:15000 }
+  ];
+  var heroLoopCtrl = initTileLoop(document.getElementById('heroVideo'), HERO_LOOP);
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var autoplayTimer = null;
   var playing = !reduceMotion;
   var playToggle = document.getElementById('heroPlayToggle');
 
-  function startAutoplay(){
-    stopAutoplay();
-    autoplayTimer = setInterval(function(){ showSlide(slideIdx + 1, false); }, 6000);
-  }
-  function stopAutoplay(){ if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; } }
-  function restartAutoplay(){ if (playing) startAutoplay(); }
-
   playToggle.textContent = playing ? '❬❬' : '▶';
-  playToggle.setAttribute('aria-label', playing ? 'Pause episode autoplay' : 'Play episode autoplay');
-  if (playing) startAutoplay();
+  playToggle.setAttribute('aria-label', playing ? 'Pause background video' : 'Play background video');
+  if (!playing && heroLoopCtrl) { heroLoopCtrl.pause(); }
 
   playToggle.addEventListener('click', function(){
     playing = !playing;
-    if (playing) { playToggle.textContent = '❬❬'; playToggle.setAttribute('aria-label','Pause episode autoplay'); startAutoplay(); }
-    else { playToggle.textContent = '▶'; playToggle.setAttribute('aria-label','Play episode autoplay'); stopAutoplay(); }
+    if (playing) { playToggle.textContent = '❬❬'; playToggle.setAttribute('aria-label','Pause background video'); if(heroLoopCtrl) heroLoopCtrl.resume(); }
+    else { playToggle.textContent = '▶'; playToggle.setAttribute('aria-label','Play background video'); if(heroLoopCtrl) heroLoopCtrl.pause(); }
   });
 
   // ---------- Modal (shared by episode tiles + ranked items) ----------
@@ -883,6 +966,37 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
     if(overlay._trigger && overlay._trigger.focus) overlay._trigger.focus();
   }
 
+  // ---------- Video modal (Sedana clips play inline instead of linking out) ----------
+  function findSedana(key){
+    for(var i=0;i<SEDANA.length;i++){ if(SEDANA[i].key === key) return SEDANA[i]; }
+    return null;
+  }
+
+  function openVideoModal(key){
+    var s = findSedana(key);
+    if(!s) return;
+    var media = document.getElementById('videoModalMedia');
+    media.innerHTML = '<button class="modal-close" id="videoModalClose" aria-label="Close">&#10005;</button>'+
+      '<video controls playsinline preload="metadata" poster="images/'+key+'.jpg">'+
+      '<source src="'+s.videoSrc+'" type="video/mp4"></video>';
+    document.getElementById('videoModalTag').textContent = s.title;
+    document.getElementById('videoModalBrief').textContent = s.role + ' — ' + s.brief;
+    var overlay = document.getElementById('videoModalOverlay');
+    overlay.classList.add('open');
+    overlay._trigger = document.activeElement;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeVideoModal(){
+    var overlay = document.getElementById('videoModalOverlay');
+    if(!overlay.classList.contains('open')) return;
+    var v = overlay.querySelector('video');
+    if(v) v.pause();
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    if(overlay._trigger && overlay._trigger.focus) overlay._trigger.focus();
+  }
+
   // ---------- Movie pages (full case studies for the two real campaigns) ----------
   var MOVIES = {
     mascardi: {
@@ -899,13 +1013,19 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
         { act:'Execution', h:"303 Pieces of Content in Five Months", p:"154 Reels and 149 carousels went out at roughly 60 posts a month, shot and edited in CapCut and Adobe Lightroom. Captions and campaign copy stayed on-brand throughout, while daily community engagement fed qualified leads into the commercial side of the role: full customer journeys from inquiry to delivery." },
         { act:'Results', h:"56K to 70.9K Followers, 5.01M Views, Discovery Over Inheritance", p:"Non-follower reach held between 55% and 66% of views every month from January through May — most of that 5.01M wasn't circling the existing audience, it was finding a new one. Non-follower reach peaked at 66% in March; by May the account was clearing over a million views a month." },
         { act:'The Takeaway', h:"Growth Was Structural, Not a Lucky Post", p:"A single viral reel can be luck. Five straight months of non-follower reach above half is a pattern — evidence the growth came from a repeatable system, not an accident. That's the exact question the next case study exists to answer." }
+      ],
+      pillars: [
+        { name:"Skits & Relatable Humor", tagline:"Built for shares, not hard sells.", posts:["hum1","m2","hum2","hum3"] },
+        { name:"Delivery & Sales Wins", tagline:"The inventory content that actually moves cars.", posts:["m3","del1","m4"] },
+        { name:"Community & Culture", tagline:"The people behind the dealership, not just the cars.", posts:["com1","com2","com3"] },
+        { name:"Reviews & Spec Breakdowns", tagline:"Straight product info, still on-brand.", posts:["rev1","m1"] }
       ]
     },
     personal: {
       cover: 'p1',
       eyebrow: 'TED+ Original Case Study',
-      title: '@tedkyarieh_',
-      role: 'Independent Personal Brand · 2025–Present',
+      title: 'Built From Zero',
+      role: 'Independent Personal Brand · @tedkyarieh_ · 2025–Present',
       stats: [['5.54M','Views / 90 days'],['2.65M','Accounts reached'],['+40%','Reach, QoQ']],
       anchor: 'campaign-personal',
       arc: [
@@ -933,6 +1053,11 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
     arcEl.innerHTML = m.arc.map(function(step){
       return '<div class="mp-step"><p class="act">'+step.act+'</p><h3>'+step.h+'</h3><p>'+step.p+'</p></div>';
     }).join('');
+    var pillarsEl = document.getElementById('mpPillars');
+    pillarsEl.innerHTML = (m.pillars || []).map(function(pillar){
+      return '<div class="mp-pillar"><p class="mp-pillar-eyebrow">'+pillar.name+'</p><p class="mp-pillar-tagline">'+pillar.tagline+'</p>'+
+        '<div class="row-scroll">'+pillar.posts.map(tileHTML).join('')+'</div></div>';
+    }).join('');
     var cta = document.getElementById('mpCta');
     cta.setAttribute('data-anchor', m.anchor);
     var overlay = document.getElementById('moviepageOverlay');
@@ -959,20 +1084,25 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
   });
 
   document.addEventListener('click', function(e){
-    var tile = e.target.closest('.tile:not(.ext-tile)');
+    var videoTile = e.target.closest('[data-video-key]');
+    if(videoTile){ openVideoModal(videoTile.getAttribute('data-video-key')); return; }
+    var tile = e.target.closest('.tile');
     if(tile){ openModal(tile.getAttribute('data-key')); return; }
     var campaignCard = e.target.closest('.campaign-card');
     if(campaignCard){ openMoviePage(campaignCard.getAttribute('data-movie')); return; }
     if(e.target === document.getElementById('modalOverlay') || e.target.closest('#modalClose')){ closeModal(); }
     if(e.target.closest('#moviepageClose')){ closeMoviePage(); }
+    if(e.target === document.getElementById('videoModalOverlay') || e.target.closest('#videoModalClose')){ closeVideoModal(); }
   });
   document.addEventListener('keydown', function(e){
     var focused = document.activeElement;
-    var isTile = focused && focused.classList && !focused.classList.contains('ext-tile') && focused.classList.contains('tile');
+    var isVideoTile = focused && focused.hasAttribute && focused.hasAttribute('data-video-key');
+    if(isVideoTile && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); openVideoModal(focused.getAttribute('data-video-key')); return; }
+    var isTile = focused && focused.classList && focused.classList.contains('tile');
     if(isTile && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); openModal(focused.getAttribute('data-key')); }
     var isCampaignCard = focused && focused.classList && focused.classList.contains('campaign-card');
     if(isCampaignCard && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); openMoviePage(focused.getAttribute('data-movie')); }
-    if(e.key === 'Escape'){ closeModal(); closeMoviePage(); }
+    if(e.key === 'Escape'){ closeModal(); closeMoviePage(); closeVideoModal(); }
   });
 
   var nav = document.getElementById('siteNav');
