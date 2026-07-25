@@ -91,7 +91,7 @@ a { color: inherit; }
 .authority-scroll:hover, .authority-scroll:focus-visible { color: var(--gold); }
 .authority-scroll svg { animation: bobDown 1.8s ease-in-out infinite; }
 @keyframes bobDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
-@media (max-width: 780px) { .authority-hero { min-height: 84vh; padding: 96px 18px 56px; } .astat { padding: 0 16px; } .astat .v { font-size: 24px; } }
+@media (max-width: 780px) { .authority-hero { min-height: 84vh; padding: 96px 18px 56px; } .astat { padding: 0 16px 14px; } .astat .v { font-size: 24px; } .authority-scroll { position: static; margin-top: 36px; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .authority-scroll svg { animation: none; } }
 
 /* ---------- BIG STAT BAND (Stripe-style, shared) ---------- */
