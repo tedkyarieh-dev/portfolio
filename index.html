@@ -492,6 +492,16 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
       <div class="row-scroll" id="rowPersonal"></div>
     </section>
 
+    <section class="row-section" id="campaign-personal-alltime">
+      <div class="row-head">
+        <div>
+          <h2 class="row-title">@tedkyarieh_ &mdash; All-Time Best</h2>
+          <p class="row-sub">Outside the 90-day window above, but the two biggest posts on either account, ever</p>
+        </div>
+      </div>
+      <div class="row-scroll" id="rowPersonalAllTime"></div>
+    </section>
+
     <section class="row-section" id="craft">
       <div class="row-head">
         <div>
@@ -708,7 +718,17 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
       synopsis:"A short POV driving reel — proof the format works even without a punchline.",
       stats:[["34.0K","Views"],["19.9K","Reach"],["1.9K","Likes"]], date:"2026-06-08", dateLabel:"08 Jun",
       permalink:"https://www.instagram.com/reel/DZUZsjrI9vC/",
-      reelMetrics:{watch:"8.1s", saved:74, shares:111}, note:"No punchline, no hook line — just the drive itself. Proof the format carries without a gimmick." }
+      reelMetrics:{watch:"8.1s", saved:74, shares:111}, note:"No punchline, no hook line — just the drive itself. Proof the format carries without a gimmick." },
+    kikuyu: { title:"The Kikuyu Accent Be Attacking Randomly", ribbon:"🏆 All-Time #1", tag1:"Reel", tag2:"@tedkyarieh_",
+      synopsis:"The single biggest post across either account, ever — 1.82M views and 153K likes. A code-switching skit about a mother-tongue accent slipping out mid-sentence, filmed POV from the driver's seat. Outside the trailing-90-day window shown above, so it doesn't appear in the ranked row — but it's the real high-water mark.",
+      stats:[["1.82M","Views"],["1.07M","Reach"],["153K","Likes"]], date:"2026-03-18", dateLabel:"18 Mar",
+      permalink:"https://www.instagram.com/reel/DWCZ8MbiPM5/",
+      reelMetrics:{watch:"13.1s", saved:5517, shares:69426}, note:"69.4K shares against 153K likes is a ~45% share-to-like ratio — most good posts run 5–10%. That means people weren't just liking it, they were tagging a specific person by name. The accent slipping out unprompted is the entire joke: zero setup, instant recognition for anyone who's caught themselves doing it. It's DM/group-chat virality, not algorithm virality — the more specific the in-joke, the more taggable it is." },
+    therapy: { title:"My Kind Of Therapy", ribbon:"All-Time #2", tag1:"Reel", tag2:"@tedkyarieh_ &times; Mascardi",
+      synopsis:"POV footage of a hard acceleration run ('pull') in a BMW X4, reframed as stress relief — 706K views, and Mascardi-tagged so it doubles as inventory content. Also outside the trailing-90-day window.",
+      stats:[["706K","Views"],["461.8K","Reach"],["52.2K","Likes"]], date:"2026-01-23", dateLabel:"23 Jan",
+      permalink:"https://www.instagram.com/reel/DT3N0lCiDsR/",
+      reelMetrics:{watch:"21.5s", saved:1586, shares:1992}, note:"'Pull' is local slang for a hard acceleration run — the caption assumes the audience already speaks that shorthand. Pairs a visceral, sound-led driving clip with a universal emotional hook (stress relief) so it needs no dialogue to land, while the BMW X4 and Mascardi tag quietly do inventory work in the background." }
   };
   // Drop compressed clips in videos/sedana-{key}.mp4 — plays inline via the video modal below, no code changes needed.
   var SEDANA = [
@@ -746,6 +766,9 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
 
   var rowP = document.getElementById('rowPersonal');
   ['p1','p2','p3','p4'].forEach(function(k){ rowP.insertAdjacentHTML('beforeend', tileHTML(k)); });
+
+  var rowPAll = document.getElementById('rowPersonalAllTime');
+  ['kikuyu','therapy'].forEach(function(k){ rowPAll.insertAdjacentHTML('beforeend', tileHTML(k)); });
 
   var rowS = document.getElementById('rowSkills');
   SKILLS.forEach(function(s){
