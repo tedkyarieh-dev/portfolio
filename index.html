@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Ted Kiarie Njuguna — Social Media Manager &amp; Content Creator, Nairobi. Case studies, real analytics, and a repeatable growth system across two Instagram accounts.">
-<meta property="og:title" content="Ted Kiarie Njuguna — Creative Portfolio">
+<meta name="description" content="Ted Kiarie Njuguna, Social Media Manager &amp; Content Creator based in Nairobi. Case studies, real analytics, and a repeatable growth system across two Instagram accounts.">
+<meta property="og:title" content="Ted Kiarie Njuguna, Creative Portfolio">
 <meta property="og:description" content="10M+ organic views, two Instagram accounts, one repeatable growth system.">
 <meta property="og:image" content="images/m1.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<title>Ted Kiarie Njuguna — Creative Portfolio</title>
+<title>Ted Kiarie Njuguna, Creative Portfolio</title>
 <style>
 
 
@@ -28,8 +28,8 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+html { scroll-behavior: smooth; scroll-snap-type: y proximity; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; scroll-snap-type: none; } }
 body { margin: 0; }
 ::selection { background: var(--accent); color: var(--accent-ink); }
 .page { background: var(--bg); color: var(--ink-1); font-family: 'IBM Plex Sans', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
@@ -46,10 +46,13 @@ a { color: inherit; }
 .hero-title.kt-in .kt-word { opacity: 1; transform: translateY(0); filter: blur(0); }
 
 .campaign-card, .hero-card { --mx: 50%; --my: 50%; }
-.campaign-card::after, .hero-card::after { content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity .35s ease; pointer-events: none; mix-blend-mode: overlay; }
+.campaign-card::after, .hero-card::after { content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity .35s ease; pointer-events: none; }
 .campaign-card::after { background: radial-gradient(360px circle at var(--mx) var(--my), rgba(255,255,255,0.16), transparent 62%); }
 .hero-card::after { background: radial-gradient(560px circle at var(--mx) var(--my), rgba(255,255,255,0.10), transparent 60%); z-index: 3; }
-.campaign-card:hover::after, .campaign-card:focus-visible::after, .hero-card:hover::after { opacity: 1; }
+/* mix-blend-mode only applied while actually hovered/focused — leaving it on permanently keeps
+   these (always-present) pseudo-elements in a special compositing mode even at opacity:0, which
+   adds constant compositing overhead site-wide. */
+.campaign-card:hover::after, .campaign-card:focus-visible::after, .hero-card:hover::after { opacity: 1; mix-blend-mode: overlay; }
 
 .tile, .genre-tile { position: relative; }
 .tile::before, .genre-tile::before { content: ''; position: absolute; inset: -40% -60%; background: linear-gradient(75deg, transparent 40%, rgba(255,255,255,0.16) 48%, rgba(255,255,255,0.04) 54%, transparent 62%); transform: translateX(-120%); transition: transform .85s cubic-bezier(.16,1,.3,1); pointer-events: none; z-index: 2; }
@@ -73,7 +76,7 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) { .film-grain { display: none; } }
 
 /* ---------- AUTHORITY HERO ---------- */
-.authority-hero { position: relative; overflow: hidden; min-height: 92vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 130px 24px 70px; background: radial-gradient(circle at 50% 15%, #1c1712 0%, var(--bg) 62%); }
+.authority-hero { position: relative; overflow: hidden; min-height: 92vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 130px 24px 70px; background: radial-gradient(circle at 50% 15%, #1c1712 0%, var(--bg) 62%); scroll-snap-align: start; }
 .authority-video { position: absolute; inset: 0; z-index: -1; overflow: hidden; }
 .authority-scrim { position: absolute; inset: 0; z-index: 0; background: radial-gradient(circle at 50% 15%, rgba(28,23,18,0.5) 0%, rgba(10,9,8,0.85) 55%, rgba(10,9,8,0.94) 100%); pointer-events: none; }
 .authority-glow { position: absolute; inset: -30% -10% auto auto; width: 75%; height: 85%; background: radial-gradient(circle at 60% 30%, var(--accent-soft), transparent 65%); pointer-events: none; }
@@ -125,9 +128,9 @@ a { color: inherit; }
 .nav-chip { width: 30px; height: 30px; border-radius: 6px; background: var(--gold); color: var(--gold-ink); display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 12px; text-decoration: none; }
 
 /* ---------- HERO ---------- */
-.hero { position: relative; margin: 0 auto 8px; max-width: 1400px; padding: 0 24px; }
+.hero { position: relative; margin: 0 auto 8px; max-width: 1400px; padding: 0 24px; scroll-snap-align: start; }
 @media (max-width: 780px) { .hero { padding: 0 10px; } }
-.hero-card { position: relative; border-radius: 18px; overflow: hidden; min-height: 82vh; display: flex; align-items: flex-end; background: #050403; box-shadow: 0 30px 60px var(--shadow); }
+.hero-card { position: relative; border-radius: 18px; overflow: hidden; min-height: 82vh; display: flex; align-items: flex-end; background: #050403; box-shadow: 0 30px 60px var(--shadow); cursor: pointer; }
 @media (max-width: 780px) { .hero-card { min-height: 90vh; border-radius: 12px; } }
 .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #050403; }
 .hero-scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,4,3,0.97) 4%, rgba(5,4,3,0.6) 42%, rgba(5,4,3,0.12) 72%), linear-gradient(to right, rgba(5,4,3,0.8) 0%, rgba(5,4,3,0.1) 58%); }
@@ -164,11 +167,9 @@ h2.row-title { font-family: 'Big Shoulders Display', sans-serif; font-weight: 70
 .row-scroll::-webkit-scrollbar-track { background: transparent; }
 
 /* Featured campaign overview cards */
-.campaign-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; padding: 6px 4px 12px; }
-@media (max-width: 820px) { .campaign-grid { grid-template-columns: 1fr; gap: 24px; } }
 .campaign-card { position: relative; border-radius: 14px; overflow: hidden; min-height: 440px; display: flex; align-items: flex-end; text-decoration: none; color: inherit; background: var(--surface); border: 1px solid var(--border); box-shadow: 0 10px 26px rgba(0,0,0,0.3); cursor: pointer; }
-.campaign-img { position: absolute; inset: 0; background: var(--surface) center/cover no-repeat; transition: transform 5s cubic-bezier(.25,.1,.25,1); }
-.campaign-card:hover .campaign-img, .campaign-card:focus-visible .campaign-img { transform: scale(1.1); transition-duration: 6s; }
+.campaign-img, .campaign-video { position: absolute; inset: 0; background: var(--surface) center/cover no-repeat; transition: transform 5s cubic-bezier(.25,.1,.25,1); }
+.campaign-card:hover .campaign-img, .campaign-card:focus-visible .campaign-img, .campaign-card:hover .campaign-video, .campaign-card:focus-visible .campaign-video { transform: scale(1.1); transition-duration: 6s; }
 .campaign-scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,4,3,0.94) 8%, rgba(5,4,3,0.5) 46%, rgba(5,4,3,0.05) 78%); }
 .tile-loop-layer { position: absolute; inset: 0; background: var(--surface) center/cover no-repeat; opacity: 0; transition: opacity 1s ease; }
 .tile-loop-layer.active { opacity: 1; }
@@ -189,8 +190,8 @@ h2.row-title { font-family: 'Big Shoulders Display', sans-serif; font-weight: 70
 .tile { position: relative; flex: 0 0 auto; width: 224px; aspect-ratio: 2/3; border-radius: 10px; overflow: hidden; cursor: pointer; scroll-snap-align: start; background: var(--surface); transition: transform .28s ease, box-shadow .28s ease; box-shadow: 0 6px 18px rgba(0,0,0,0.35); border: 1px solid var(--border); }
 @media (max-width: 620px) { .tile { width: 166px; } }
 .tile:hover, .tile:focus-visible { transform: translateY(-6px); z-index: 5; box-shadow: 0 20px 40px rgba(0,0,0,0.55); outline: none; }
-.tile-img { position: absolute; inset: 0; background: var(--surface) center/cover no-repeat; transition: transform 5s cubic-bezier(.25,.1,.25,1); }
-.tile:hover .tile-img, .tile:focus-visible .tile-img { transform: scale(1.13); transition-duration: 6s; }
+.tile-img, .tile-video { position: absolute; inset: 0; background: var(--surface) center/cover no-repeat; transition: transform 5s cubic-bezier(.25,.1,.25,1); }
+.tile:hover .tile-img, .tile:focus-visible .tile-img, .tile:hover .tile-video, .tile:focus-visible .tile-video { transform: scale(1.13); transition-duration: 6s; }
 .tile-scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.45) 38%, rgba(0,0,0,0.02) 62%); }
 .tile-badge { position: absolute; top: 10px; left: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; font-weight: 600; letter-spacing: 0.04em; background: var(--accent); color: var(--accent-ink); border-radius: 4px; padding: 3px 7px; text-transform: uppercase; }
 .tile-info-icon { position: absolute; top: 9px; right: 9px; width: 24px; height: 24px; border-radius: 50%; background: rgba(0,0,0,0.45); border: 1px solid rgba(255,255,255,0.35); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; opacity: 0; transition: opacity .2s ease; }
@@ -205,9 +206,20 @@ h2.row-title { font-family: 'Big Shoulders Display', sans-serif; font-weight: 70
 @media (max-width: 620px) { .genre-tile { width: 160px; height: 112px; font-size: 14.5px; } }
 .genre-tile .glyph { font-size: 24px; margin-bottom: 8px; }
 .genre-tile .sub { font-family: 'IBM Plex Sans', sans-serif; font-weight: 400; text-transform: none; font-size: 11px; color: rgba(255,255,255,0.85); margin-top: 4px; letter-spacing: 0; }
+/* On-brand capability tile: dark surface + red accent instead of the colorful-gradient/emoji treatment */
+.capability-tile { height: auto; min-height: 148px; padding: 20px 18px; justify-content: flex-start; background: var(--surface); border: 1px solid var(--border); transition: border-color .25s ease; }
+.capability-tile:hover, .capability-tile:focus-visible { border-color: var(--accent); }
+.capability-tile .glyph { font-size: 21px; margin-bottom: 16px; opacity: .9; }
+.capability-tile .sub { color: var(--ink-2); }
+.capability-tile .accent-bar { background: linear-gradient(90deg, var(--accent), transparent); }
+@media (max-width: 620px) { .capability-tile { min-height: 132px; } }
 
 /* ---------- MODAL ---------- */
-.modal-overlay { position: fixed; inset: 0; background: rgba(5,4,3,0.8); backdrop-filter: blur(3px); display: none; align-items: center; justify-content: center; z-index: 100; padding: 20px; }
+/* Higher than .moviepage-overlay (110): the post-detail and video modals can open from
+   inside the moviepage/Sedana overlay, which stays open behind them (by design, so closing
+   the modal returns you right where you were). Without out-ranking it here, that overlay's
+   opaque background sits on top and makes the modal invisible and unclickable. */
+.modal-overlay { position: fixed; inset: 0; background: rgba(5,4,3,0.8); backdrop-filter: blur(3px); display: none; align-items: center; justify-content: center; z-index: 130; padding: 20px; }
 .modal-overlay.open { display: flex; }
 .modal { width: 100%; max-width: 640px; max-height: 88vh; overflow-y: auto; background: rgba(34,30,26,0.86); border-radius: 14px; border: 1px solid var(--glass-border); box-shadow: inset 0 1px 0 var(--glass-highlight), 0 40px 80px rgba(0,0,0,0.6); backdrop-filter: saturate(1.5) blur(var(--glass-blur)); }
 .modal-media { position: relative; aspect-ratio: 16/9; background: #050403 center/cover no-repeat; }
@@ -266,6 +278,31 @@ h2.row-title { font-family: 'Big Shoulders Display', sans-serif; font-weight: 70
 .mp-pillar-eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin: 0 0 4px; }
 .mp-pillar-tagline { font-size: 13px; color: var(--ink-3); margin: 0 0 14px; }
 .mp-pillar .row-scroll { padding: 6px 4px 10px; margin: 0 -4px; }
+.tile-placeholder { cursor: default; }
+.tile-placeholder .tile-img { display: flex; align-items: center; justify-content: center; background: linear-gradient(155deg, #201c16, #33291b); }
+.tile-placeholder .tile-icon { font-size: 26px; opacity: .5; }
+.mp-most-viewed { margin-top: 44px; padding-top: 40px; border-top: 1px solid var(--border); }
+.mp-most-viewed-eyebrow { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin: 0 0 4px; }
+.mp-most-viewed-tagline { font-size: 13px; color: var(--ink-3); margin: 0 0 14px; }
+.mp-most-viewed .row-scroll { padding: 6px 4px 10px; margin: 0 -4px; }
+
+/* ---------- Reel showcase (Built From Zero: video-forward, ranked highest to lowest) ---------- */
+.mp-showcase-intro { font-size: 14.5px; line-height: 1.7; color: var(--ink-2); max-width: 62ch; margin: 0 0 36px; }
+.reel-item { display: flex; gap: 28px; align-items: flex-start; padding: 28px 0; border-top: 1px solid var(--border); }
+.reel-item:first-of-type { border-top: none; padding-top: 0; }
+.reel-media { position: relative; flex: 0 0 auto; width: 190px; aspect-ratio: 9/16; border-radius: 12px; overflow: hidden; cursor: pointer; box-shadow: 0 10px 26px rgba(0,0,0,0.35); background: var(--surface); }
+.reel-media .tile-video { position: absolute; inset: 0; transition: transform 5s cubic-bezier(.25,.1,.25,1); }
+.reel-media:hover .tile-video, .reel-media:focus-visible .tile-video { transform: scale(1.08); transition-duration: 6s; }
+.reel-rank { position: absolute; top: 10px; left: 10px; z-index: 3; font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 12px; color: #fff; background: rgba(5,4,3,0.6); border: 1px solid var(--glass-border); border-radius: 20px; padding: 3px 10px; backdrop-filter: saturate(1.4) blur(var(--glass-blur)); }
+.reel-copy { flex: 1 1 auto; min-width: 0; padding-top: 4px; }
+.reel-views { font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 20px; color: var(--gold); margin: 0 0 6px; }
+.reel-views span { font-family: 'IBM Plex Sans', sans-serif; font-weight: 400; font-size: 11px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.06em; margin-left: 4px; }
+.reel-title { font-family: 'Big Shoulders Display', sans-serif; font-weight: 700; font-size: 21px; text-transform: uppercase; color: var(--ink-1); margin: 0 0 8px; }
+.reel-insight { font-size: 14px; line-height: 1.65; color: var(--ink-2); max-width: 58ch; margin: 0 0 12px; }
+.reel-permalink { font-size: 12.5px; color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 1px; }
+.reel-permalink:hover, .reel-permalink:focus-visible { color: var(--accent); border-bottom-color: var(--accent); }
+@media (max-width: 620px) { .reel-item { flex-direction: column; gap: 16px; } .reel-media { width: 140px; } }
+
 .mp-cta { display: inline-flex; margin-top: 44px; color: var(--gold); text-decoration: none; font-size: 13.5px; border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
 .mp-cta:hover, .mp-cta:focus-visible { color: var(--accent); border-bottom-color: var(--accent); }
 
@@ -347,7 +384,7 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
     <span class="status-pill hide-sm"><span class="status-dot"></span>Open to Work</span>
     <div class="nav-links">
       <a href="#work" class="hide-sm">Work</a>
-      <a href="#campaign-mascardi" class="hide-sm">Most Watched</a>
+      <a href="#work" class="hide-sm">Most Watched</a>
       <a href="#loop" class="hide-sm">Framework</a>
       <a href="#skills" class="hide-sm">Capabilities</a>
       <a href="#contact">Contact</a>
@@ -356,13 +393,17 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
   </nav>
 
   <div class="authority-hero" id="authorityHero">
-    <div class="authority-video" id="authorityVideo" aria-hidden="true"></div>
+    <div class="authority-video" id="authorityVideo" aria-hidden="true">
+      <video id="authorityVideoEl" muted autoplay loop playsinline preload="auto" poster="images/posters/authority-hero.jpg" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+        <source src="videos/authority-hero.mp4" type="video/mp4">
+      </video>
+    </div>
     <div class="authority-scrim" aria-hidden="true"></div>
     <div class="authority-glow" aria-hidden="true"></div>
     <div class="authority-content">
       <p class="authority-eyebrow"><span class="dot"></span>Creative Strategist &middot; Social Growth &middot; Automotive Storytelling</p>
       <h1 class="authority-name">TED KIARIE NJUGUNA</h1>
-      <p class="authority-pitch">I build content people can't stop watching &mdash; and accounts people check daily.</p>
+      <p class="authority-pitch">I build content people can't stop watching, and accounts people check daily.</p>
       <div class="authority-stats" id="authorityStats">
         <div class="astat"><div class="v">10M+</div><div class="l">Organic Views</div></div>
         <div class="astat"><div class="v">70.9K</div><div class="l">Followers Grown</div></div>
@@ -373,73 +414,60 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
   </div>
 
   <div class="hero" id="work">
-    <div class="hero-card" id="heroCard">
-      <div class="hero-video" id="heroVideo" aria-hidden="true"></div>
+    <div class="hero-card" id="heroCard" data-movie="mascardi" tabindex="0" role="button" aria-label="Open Mascardi Luxury Cars case study">
+      <div class="hero-video" id="heroVideo" aria-hidden="true">
+        <video id="heroVideoEl" muted autoplay loop playsinline preload="auto" poster="images/posters/hero-mascardi.jpg" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+          <source src="videos/hero-mascardi.mp4" type="video/mp4">
+        </video>
+      </div>
       <div class="hero-glow"></div>
       <div class="hero-scrim"></div>
       <div class="hero-content">
         <p class="hero-eyebrow"><span class="dot"></span>Featured Work</p>
         <h1 class="hero-title">Mascardi Luxury Cars</h1>
-        <p class="hero-logline">Grew Instagram from 56K to 70.9K followers in five months &mdash; discovery, not an inherited audience. Every reel, carousel and delivery story shot, edited and posted end to end.</p>
+        <p class="hero-logline">Grew Instagram from 56K to 70.9K followers in five months through discovery, not an inherited audience. Every reel, carousel and delivery story shot, edited and posted end to end.</p>
         <div class="hero-stats" id="heroStats">
           <div class="hero-stat"><div class="v">5.01M</div><div class="l">Views / 5mo</div></div>
           <div class="hero-stat"><div class="v">303</div><div class="l">Pieces Produced</div></div>
           <div class="hero-stat"><div class="v">57%</div><div class="l">Non-Follower Reach</div></div>
         </div>
         <div class="hero-actions">
-          <a class="btn-play" href="#campaigns">&#9654; View Campaigns</a>
-          <a class="btn-info" href="#skills">&#43; Capabilities</a>
+          <a class="btn-play" href="#" onclick="event.preventDefault()">&#9654; View Campaigns</a>
+          <a class="btn-info" href="#skills" onclick="event.stopPropagation()">&#43; Capabilities</a>
         </div>
       </div>
       <div class="hero-controls">
-        <button class="hero-playtoggle" id="heroPlayToggle" aria-label="Pause background video">&#10073;&#10073;</button>
+        <button class="hero-playtoggle" id="heroPlayToggle" aria-label="Pause background video" onclick="event.stopPropagation()">&#10073;&#10073;</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero" id="personal-work">
+    <div class="hero-card" id="personalHeroCard" data-movie="personal" tabindex="0" role="button" aria-label="Open Built From Zero (@tedkyarieh_) case study">
+      <div class="hero-video" id="personalHeroVideo" aria-hidden="true"></div>
+      <div class="hero-glow"></div>
+      <div class="hero-scrim"></div>
+      <div class="hero-content">
+        <p class="hero-eyebrow"><span class="dot"></span>Featured Work</p>
+        <h1 class="hero-title">Built From Zero</h1>
+        <p class="hero-logline">No inherited following, no dealership brand. @tedkyarieh_ crossed 5.54M views and 2.65M accounts reached in 90 days, proof the playbook travels beyond one account.</p>
+        <div class="hero-stats" id="personalHeroStats">
+          <div class="hero-stat"><div class="v">5.54M</div><div class="l">Views / 90d</div></div>
+          <div class="hero-stat"><div class="v">2.65M</div><div class="l">Accounts Reached</div></div>
+          <div class="hero-stat"><div class="v">+40%</div><div class="l">Reach, QoQ</div></div>
+        </div>
+        <div class="hero-actions">
+          <a class="btn-play" href="#" onclick="event.preventDefault()">&#9654; View My Work</a>
+          <a class="btn-info" href="#skills" onclick="event.stopPropagation()">&#43; Capabilities</a>
+        </div>
+      </div>
+      <div class="hero-controls">
+        <button class="hero-playtoggle" id="personalHeroPlayToggle" aria-label="Pause background video" onclick="event.stopPropagation()">&#10073;&#10073;</button>
       </div>
     </div>
   </div>
 
   <div class="shell">
-
-    <section class="row-section overview" id="campaigns">
-      <div class="row-head">
-        <div>
-          <h2 class="row-title">Featured Campaigns</h2>
-          <p class="row-sub">The two accounts behind every number on this page</p>
-        </div>
-      </div>
-      <div class="campaign-grid">
-        <div class="campaign-card" id="cardMascardi" data-movie="mascardi" tabindex="0" role="button" aria-label="Open Mascardi Luxury Cars case study">
-          <div class="campaign-img"></div>
-          <div class="campaign-scrim"></div>
-          <div class="campaign-arrow" aria-hidden="true">&#9654;</div>
-          <div class="campaign-body">
-            <p class="campaign-eyebrow">Digital Marketing Lead &amp; Commercial Exec. · Jul 2025&ndash;Present</p>
-            <h3 class="campaign-title">Mascardi Luxury Cars</h3>
-            <p class="campaign-desc">56K &rarr; 70.9K followers &mdash; discovery, not an inherited audience.</p>
-            <div class="campaign-stats">
-              <div><div class="v">5.01M</div><div class="l">Views / 5mo</div></div>
-              <div><div class="v">57%</div><div class="l">Avg. non-follower reach</div></div>
-            </div>
-            <a class="campaign-jump" href="#campaign-mascardi" onclick="event.stopPropagation()">Jump to the posts &darr;</a>
-          </div>
-        </div>
-        <div class="campaign-card" id="cardPersonal" data-movie="personal" tabindex="0" role="button" aria-label="Open Built From Zero (@tedkyarieh_) case study">
-          <div class="campaign-img"></div>
-          <div class="campaign-scrim"></div>
-          <div class="campaign-arrow" aria-hidden="true">&#9654;</div>
-          <div class="campaign-body">
-            <p class="campaign-eyebrow">Independent &middot; 2025&ndash;Present</p>
-            <h3 class="campaign-title">Built From Zero</h3>
-            <p class="campaign-handle">@tedkyarieh_</p>
-            <p class="campaign-desc">No inherited following, no dealership brand &mdash; proof the playbook travels beyond one account.</p>
-            <div class="campaign-stats">
-              <div><div class="v">5.54M</div><div class="l">Views / 90d</div></div>
-              <div><div class="v">+40%</div><div class="l">Reach, QoQ</div></div>
-            </div>
-            <a class="campaign-jump" href="#campaign-personal" onclick="event.stopPropagation()">Jump to the posts &darr;</a>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <section class="row-section stat-section">
       <div class="stat-band">
@@ -456,39 +484,6 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
         <span>Automotive Storytelling</span><span>Retention-First Editing</span><span>Discovery Over Inheritance</span><span>Community-Led Sales</span><span>Consistent Cadence</span><span>Reels &middot; Carousels &middot; Campaigns</span><span>Nairobi, Kenya</span>
       </div>
     </div>
-
-    <section class="row-section" id="campaign-mascardi">
-      <div class="row-head">
-        <div>
-          <h2 class="row-title">Mascardi Luxury Cars &mdash; Most Viewed</h2>
-          <p class="row-sub">Ranked by real view count, live from Instagram</p>
-        </div>
-      </div>
-      <div class="row-scroll" id="rowMascardi"></div>
-    </section>
-
-    <section class="row-section" id="campaign-personal">
-      <div class="row-head">
-        <div>
-          <h2 class="row-title">@tedkyarieh_ &mdash; Built From Zero</h2>
-          <p class="row-sub">Every post ranked by real view count, live from Instagram</p>
-        </div>
-      </div>
-      <p class="campaign-eyebrow" style="margin:0 0 12px;">All-Time Best &middot; outside the 90-day window, but the two biggest posts ever</p>
-      <div class="row-scroll" id="rowPersonalAllTime"></div>
-      <p class="campaign-eyebrow" style="margin:26px 0 12px;">Trailing 90 Days &middot; top-ranked, most recent</p>
-      <div class="row-scroll" id="rowPersonal"></div>
-    </section>
-
-    <section class="row-section" id="craft">
-      <div class="row-head">
-        <div>
-          <h2 class="row-title">The Craft</h2>
-          <p class="row-sub">The habits behind every frame that ships</p>
-        </div>
-      </div>
-      <div class="row-scroll" id="rowCraft"></div>
-    </section>
 
     <section class="row-section" id="loop">
       <div class="row-head">
@@ -507,9 +502,17 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
           <p class="row-sub">One-off productions outside the two ongoing accounts above</p>
         </div>
       </div>
-      <p class="campaign-eyebrow" style="margin:-6px 0 16px;">Freelance Video Production &amp; Editing &middot; Jun 2026</p>
-      <p class="campaign-desc" style="max-width:760px; margin:0 0 22px;">Shot, edited and produced marketing video content for a launch event at Masshouse on 27 June 2026, run by Sedana in partnership with Jgadget Solaaris and Harriet Bella. Tap a tile to watch the clip.</p>
-      <div class="row-scroll" id="rowSedana"></div>
+      <div class="campaign-card" id="sedanaCard" tabindex="0" role="button" aria-label="Sedana: Masshouse Launch Event, see all 3 clips">
+        <div class="campaign-video" id="sedanaPreview" aria-hidden="true"></div>
+        <div class="campaign-scrim"></div>
+        <div class="campaign-arrow" aria-hidden="true">&#9654;</div>
+        <div class="campaign-body">
+          <p class="campaign-eyebrow">Freelance Video Production &amp; Editing &middot; Jun 2026</p>
+          <h3 class="campaign-title">Sedana: Masshouse Launch Event</h3>
+          <p class="campaign-desc">Shot, edited and produced marketing video content for a launch event at Masshouse on 27 June 2026, run by Sedana in partnership with Jgadget Solaaris and Harriet Bella.</p>
+          <a class="campaign-jump" href="#" onclick="event.preventDefault()">See all 3 clips &darr;</a>
+        </div>
+      </div>
     </section>
 
     <section class="row-section" id="timeline">
@@ -533,10 +536,10 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
     </section>
 
     <section class="closing">
-      <h2 class="section-title">If your brand deserves more than <span class="accent-word">pretty posts</span>&mdash;</h2>
-      <p>Let's build something people actually remember. Two accounts, one repeatable system, 10M+ organic views to show for it &mdash; open to social media management, content creation and brand partnerships, automotive or otherwise.</p>
+      <h2 class="section-title">If your brand deserves more than <span class="accent-word">pretty posts</span></h2>
+      <p>Let's build something people actually remember. Two accounts, one repeatable system, and 10M+ organic views to show for it. Open to social media management, content creation and brand partnerships, automotive or otherwise.</p>
       <div class="closing-actions">
-        <a class="btn-play" id="cvLink" href="cv/Ted_Kiarie_Njuguna_CV_Porsche_MarketingComms_Intern.pdf" target="_blank" rel="noopener">View CV</a>
+        <a class="btn-play" id="cvLink" href="cv/Ted_Kiarie_Njuguna_CV.pdf" target="_blank" rel="noopener">View CV</a>
         <a class="btn-info" href="https://linkedin.com/in/ted-kyarieh/" target="_blank" rel="noopener">See LinkedIn</a>
         <a class="btn-info" href="#contact">Contact Details &#8595;</a>
       </div>
@@ -549,7 +552,7 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
         <a href="tel:+254792201569">+254 792 201 569</a>
         <a href="https://linkedin.com/in/ted-kyarieh/">LinkedIn</a>
         <a href="https://instagram.com/tedkyarieh_">@tedkyarieh_</a>
-        <a id="cvLinkFooter" href="cv/Ted_Kiarie_Njuguna_CV_Porsche_MarketingComms_Intern.pdf" target="_blank" rel="noopener">Full CV &rarr;</a>
+        <a id="cvLinkFooter" href="cv/Ted_Kiarie_Njuguna_CV.pdf" target="_blank" rel="noopener">Full CV &rarr;</a>
       </div>
     </footer>
 
@@ -612,8 +615,20 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
       <div class="mp-body">
         <div class="mp-arc" id="mpArc"></div>
         <div class="mp-pillars" id="mpPillars"></div>
-        <a class="mp-cta" id="mpCta" href="#top">See every post in this campaign &darr;</a>
+        <div class="mp-most-viewed" id="mpMostViewed"></div>
+        <div class="mp-reel-showcase" id="mpReelShowcase"></div>
+        <a class="mp-cta" id="mpCta" href="#" target="_blank" rel="noopener">See more on Instagram &#8599;</a>
       </div>
+    </div>
+  </div>
+
+  <div class="moviepage-overlay" id="sedanaOverlay">
+    <button class="moviepage-close" id="sedanaClose" aria-label="Close">&#10005;</button>
+    <div class="mp-body" style="padding-top:100px;">
+      <p class="mp-pillar-eyebrow">Sedana: Masshouse Launch Event</p>
+      <h2 class="mp-title" style="margin:6px 0 16px;">Freelance Video Production &amp; Editing</h2>
+      <p class="campaign-desc" style="max-width:640px; margin:0 0 30px;">Shot, edited and produced marketing video content for a launch event at Masshouse on 27 June 2026, run by Sedana in partnership with Jgadget Solaaris and Harriet Bella. Tap a clip below to watch it in full, with sound.</p>
+      <div class="row-scroll" id="sedanaClipsRow"></div>
     </div>
   </div>
 
@@ -623,50 +638,50 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
 (function(){
   var DATA = {
     m1: { title:"The G30 That Beats a C-Class", ribbon:"🏆 #1 Most Viewed", tag1:"Carousel", tag2:"Mascardi Luxury Cars",
-      synopsis:"A fully-specced BMW G30 carousel making the case against a comparable C-Class at 4.0M — sold before the post even went up. Mascardi's top-viewed post this run.",
+      synopsis:"A fully-specced BMW G30 carousel making the case against a comparable C-Class at 4.0M. Sold before the post even went up, Mascardi's top-viewed post this run.",
       stats:[["9.9K","Views"],["4.8K","Reach"],["295","Likes"]],
-      month:"July", ep:1, subtitle:"The G30 That Beats a C-Class — Carousel", permalink:"https://www.instagram.com/p/DavSabPjYWP/" },
+      month:"July", ep:1, subtitle:"The G30 That Beats a C-Class: Carousel", permalink:"https://www.instagram.com/p/DavSabPjYWP/" },
     m2: { title:"Sales Skills vs. Football Skills", ribbon:"#2 Most Viewed", tag1:"Reel", tag2:"Mascardi Luxury Cars",
-      synopsis:"A World Cup tie-in reel poking fun at the sales team — built for shareability over hard-sell, and it worked.",
+      synopsis:"A World Cup tie-in reel poking fun at the sales team, built for shareability over hard-sell, and it worked.",
       stats:[["9.4K","Views"],["6.1K","Reach"],["167","Likes"]],
-      month:"July", ep:2, subtitle:"Sales Skills vs. Football Skills — Reel", permalink:"https://www.instagram.com/reel/Da-xLsuNmzU/",
-      reelMetrics:{watch:"9.5s", saved:3, shares:4}, note:"A timely World Cup news-jack paired with a self-deprecating sales joke — low production, high shareability." },
+      month:"July", ep:2, subtitle:"Sales Skills vs. Football Skills: Reel", permalink:"https://www.instagram.com/reel/Da-xLsuNmzU/",
+      reelMetrics:{watch:"9.5s", saved:3, shares:4}, note:"A timely World Cup news-jack paired with a self-deprecating sales joke. Low production, high shareability." },
     m3: { title:"Ksh1M Off a Fully-Specced 530i", ribbon:"#3 Most Viewed", tag1:"Carousel", tag2:"Mascardi Luxury Cars",
-      synopsis:"A 2018 BMW 530i M Sport Performance Package carousel, priced to move — Mascardi's highest-engagement post this run.",
+      synopsis:"A 2018 BMW 530i M Sport Performance Package carousel, priced to move. Mascardi's highest-engagement post this run.",
       stats:[["9.3K","Views"],["4.2K","Reach"],["434","Likes"]],
-      month:"July", ep:3, subtitle:"Ksh1M Off a Fully-Specced 530i — Carousel", permalink:"https://www.instagram.com/p/DbGrOJEDGIt/" },
+      month:"July", ep:3, subtitle:"Ksh1M Off a Fully-Specced 530i: Carousel", permalink:"https://www.instagram.com/p/DbGrOJEDGIt/" },
     m4: { title:"Worth The Wait", ribbon:"#4 Most Viewed", tag1:"Reel", tag2:"Mascardi Luxury Cars",
-      synopsis:"\"The hardest part about owning a Porsche is explaining why you waited so long\" — a delivery reel built around the brand's own wait-list joke.",
+      synopsis:"\"The hardest part about owning a Porsche is explaining why you waited so long.\" A delivery reel built around the brand's own wait-list joke.",
       stats:[["8.2K","Views"],["5.9K","Reach"],["278","Likes"]],
-      month:"July", ep:4, subtitle:"Worth The Wait — Reel", permalink:"https://www.instagram.com/reel/Da5R2OhtYUY/",
+      month:"July", ep:4, subtitle:"Worth The Wait: Reel", permalink:"https://www.instagram.com/reel/Da5R2OhtYUY/",
       reelMetrics:{watch:"5.9s", saved:21, shares:28}, note:"Leans on the brand's own running joke about Porsche wait times instead of listing specs." },
     m5: { title:"Fully Sold Out", ribbon:"#5 Most Viewed", tag1:"Carousel", tag2:"Mascardi Luxury Cars",
-      synopsis:"The entire Porsche selection sold through — a plain sell-out announcement that still cracked the top 5 by views.",
+      synopsis:"The entire Porsche selection sold through, a plain sell-out announcement that still cracked the top 5 by views.",
       stats:[["7.5K","Views"],["3.3K","Reach"],["141","Likes"]],
-      month:"July", ep:5, subtitle:"Fully Sold Out — Carousel", permalink:"https://www.instagram.com/p/Da3RROMjZhr/" },
+      month:"July", ep:5, subtitle:"Fully Sold Out: Carousel", permalink:"https://www.instagram.com/p/Da3RROMjZhr/" },
     hum1: { title:"Gen Z Forgot To Lock In At Work", ribbon:"Skit", tag1:"Reel", tag2:"Mascardi Luxury Cars",
-      synopsis:"A pure relatability skit — no product pitch, no CTA — that became Mascardi's biggest post by a wide margin.",
+      synopsis:"A pure relatability skit, no product pitch, no CTA, that became Mascardi's biggest post by a wide margin.",
       stats:[["342K","Views"],["198K","Reach"],["33.8K","Likes"]],
       permalink:"https://www.instagram.com/reel/DaiTcf6tQ9Q/",
-      reelMetrics:{saved:876, shares:4229}, note:"No dialogue, no sales pitch — pure relatability. 4.2K shares suggest it traveled well past Mascardi's own following." },
+      reelMetrics:{saved:876, shares:4229}, note:"No dialogue, no sales pitch, pure relatability. 4.2K shares suggest it traveled well past Mascardi's own following." },
     hum2: { title:"Guess Everyone Should Mind Their Business", ribbon:"Skit", tag1:"Reel", tag2:"Mascardi Luxury Cars",
-      synopsis:"Light showroom humor with zero hard sell — built for shares over specs.",
+      synopsis:"Light showroom humor with zero hard sell, built for shares over specs.",
       stats:[["12.0K","Views"],["7.9K","Reach"],["438","Likes"]],
       permalink:"https://www.instagram.com/reel/DaTBl6OtY2F/" },
     hum3: { title:"Please Don't Open The Trunk", ribbon:"Skit", tag1:"Reel", tag2:"Mascardi Luxury Cars",
       synopsis:"A showroom in-joke turned into a quick punchline reel.",
       stats:[["4.7K","Views"],["3.4K","Reach"],["136","Likes"]],
       permalink:"https://www.instagram.com/reel/DaKoMf5tknv/" },
-    del1: { title:"Porsche Cayenne S Chrono — Sold in 2 Days", ribbon:"Delivery", tag1:"Carousel", tag2:"Mascardi Luxury Cars",
-      synopsis:"Two days into the Mid Year Sale and this Cayenne was already off the market — urgency baked into the caption, not just the offer.",
+    del1: { title:"Porsche Cayenne S Chrono: Sold in 2 Days", ribbon:"Delivery", tag1:"Carousel", tag2:"Mascardi Luxury Cars",
+      synopsis:"Two days into the Mid Year Sale and this Cayenne was already off the market, urgency baked into the caption, not just the offer.",
       stats:[["6.8K","Reach"],["340","Likes"],["25","Shares"]],
       permalink:"https://www.instagram.com/p/DaSZQWKjYQo/" },
-    com1: { title:"This Week's Recap — Mascardi Family", ribbon:"Community", tag1:"Carousel", tag2:"Mascardi Luxury Cars",
-      synopsis:"Behind-the-scenes recap format: deliveries, late nights, the team — the human side of the dealership, not just the inventory.",
+    com1: { title:"This Week's Recap: Mascardi Family", ribbon:"Community", tag1:"Carousel", tag2:"Mascardi Luxury Cars",
+      synopsis:"Behind-the-scenes recap format: deliveries, late nights, the team. The human side of the dealership, not just the inventory.",
       stats:[["2.6K","Reach"],["134","Likes"],["3","Saves"]],
       permalink:"https://www.instagram.com/p/DaIh81EDbBS/" },
     com2: { title:"Some Of Our Ladies", ribbon:"Community", tag1:"Reel", tag2:"Mascardi Luxury Cars",
-      synopsis:"Team-culture content — putting faces to the brand instead of only the cars.",
+      synopsis:"Team-culture content, putting faces to the brand instead of only the cars.",
       stats:[["5.0K","Views"],["3.6K","Reach"],["173","Likes"]],
       permalink:"https://www.instagram.com/reel/DadHCZNNZRb/" },
     com3: { title:"Dear Bruce…", ribbon:"Community", tag1:"Reel", tag2:"Mascardi Luxury Cars",
@@ -674,62 +689,62 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
       stats:[["5.2K","Views"],["3.8K","Reach"],["277","Likes"]],
       permalink:"https://www.instagram.com/reel/DaK-_AQtk1D/" },
     rev1: { title:"BMW 320i Review, Mascardi Style", ribbon:"Review", tag1:"Reel", tag2:"Mascardi Luxury Cars",
-      synopsis:"A straight spec review with the brand's own voice mixed in — proof the content can educate and still sound like Mascardi.",
+      synopsis:"A straight spec review with the brand's own voice mixed in, proof the content can educate and still sound like Mascardi.",
       stats:[["6.5K","Views"],["4.6K","Reach"],["285","Likes"]],
       permalink:"https://www.instagram.com/reel/Dap0iWfN9bv/" },
     p1: { title:"I Know I'm Not The Only One", ribbon:"🏆 #1 Most Viewed", tag1:"Reel", tag2:"@tedkyarieh_",
-      synopsis:"The single biggest post on either account — 1.03M views and 41.6K likes, pure car-culture relatability with zero paid promotion behind it.",
+      synopsis:"The single biggest post on either account: 1.03M views and 41.6K likes, pure car-culture relatability with zero paid promotion behind it.",
       stats:[["1.03M","Views"],["778K","Reach"],["41.6K","Likes"]], date:"2026-05-21", dateLabel:"21 May",
       permalink:"https://www.instagram.com/reel/DYmzFqHI-ph/",
-      reelMetrics:{watch:"10.2s", saved:1285, shares:4054}, note:"Pure relatability, no dialogue, no CTA — 4K+ shares suggest it traveled through DMs, not just the algorithm." },
+      reelMetrics:{watch:"10.2s", saved:1285, shares:4054}, note:"Pure relatability, no dialogue, no CTA. 4K+ shares suggest it traveled through DMs, not just the algorithm." },
     p2: { title:"Boost Therapy", ribbon:"#2 Most Viewed", tag1:"Reel", tag2:"@tedkyarieh_",
-      synopsis:"Fuel-price relatability humor — the kind of post that travels because everyone's felt it.",
+      synopsis:"Fuel-price relatability humor, the kind of post that travels because everyone's felt it.",
       stats:[["59.3K","Views"],["43.7K","Reach"],["2.8K","Likes"]], date:"2026-05-20", dateLabel:"20 May",
       permalink:"https://www.instagram.com/reel/DYkHukOIbKf/",
-      reelMetrics:{watch:"7.4s", saved:98, shares:543}, note:"A universal frustration — fuel prices — turned into a 9-second punchline, short enough to rewatch." },
+      reelMetrics:{watch:"7.4s", saved:98, shares:543}, note:"A universal frustration, fuel prices, turned into a 9-second punchline, short enough to rewatch." },
     p3: { title:"Gotta See Those Dreams Through", ribbon:"#3 Most Viewed", tag1:"Reel", tag2:"@tedkyarieh_",
-      synopsis:"An aspirational car-culture reel in the account's motivational register — 44K views and 4.5K likes.",
+      synopsis:"An aspirational car-culture reel in the account's motivational register, 44K views and 4.5K likes.",
       stats:[["44.4K","Views"],["30.4K","Reach"],["4.5K","Likes"]], date:"2026-05-28", dateLabel:"28 May",
       permalink:"https://www.instagram.com/reel/DY5F8ggIk2c/",
-      reelMetrics:{watch:"8.2s", saved:211, shares:253}, note:"Aspirational, voiceover-style caption over POV driving footage — the account's motivational register." },
+      reelMetrics:{watch:"8.2s", saved:211, shares:253}, note:"Aspirational, voiceover-style caption over POV driving footage, the account's motivational register." },
     p4: { title:"Let Me Drive", ribbon:"#4 Most Viewed", tag1:"Reel", tag2:"@tedkyarieh_",
-      synopsis:"A short POV driving reel — proof the format works even without a punchline.",
+      synopsis:"A short POV driving reel, proof the format works even without a punchline.",
       stats:[["34.0K","Views"],["19.9K","Reach"],["1.9K","Likes"]], date:"2026-06-08", dateLabel:"08 Jun",
       permalink:"https://www.instagram.com/reel/DZUZsjrI9vC/",
-      reelMetrics:{watch:"8.1s", saved:74, shares:111}, note:"No punchline, no hook line — just the drive itself. Proof the format carries without a gimmick." },
+      reelMetrics:{watch:"8.1s", saved:74, shares:111}, note:"No punchline, no hook line, just the drive itself. Proof the format carries without a gimmick." },
     kikuyu: { title:"The Kikuyu Accent Be Attacking Randomly", ribbon:"🏆 All-Time #1", tag1:"Reel", tag2:"@tedkyarieh_",
-      synopsis:"The single biggest post across either account, ever — 1.82M views and 153K likes. A code-switching skit about a mother-tongue accent slipping out mid-sentence, filmed POV from the driver's seat. Outside the trailing-90-day window shown above, so it doesn't appear in the ranked row — but it's the real high-water mark.",
+      synopsis:"The single biggest post across either account, ever: 1.82M views and 153K likes. A code-switching skit about a mother-tongue accent slipping out mid-sentence, filmed POV from the driver's seat. Outside the trailing-90-day window shown above, so it doesn't appear in the ranked row, but it's the real high-water mark.",
       stats:[["1.82M","Views"],["1.07M","Reach"],["153K","Likes"]], date:"2026-03-18", dateLabel:"18 Mar",
       permalink:"https://www.instagram.com/reel/DWCZ8MbiPM5/",
-      reelMetrics:{watch:"13.1s", saved:5517, shares:69426}, note:"69.4K shares against 153K likes is a ~45% share-to-like ratio — most good posts run 5–10%. That means people weren't just liking it, they were tagging a specific person by name. The accent slipping out unprompted is the entire joke: zero setup, instant recognition for anyone who's caught themselves doing it. It's DM/group-chat virality, not algorithm virality — the more specific the in-joke, the more taggable it is." },
+      reelMetrics:{watch:"13.1s", saved:5517, shares:69426}, note:"69.4K shares against 153K likes is a ~45% share-to-like ratio. Most good posts run 5–10%, which means people weren't just liking it, they were tagging a specific person by name. The accent slipping out unprompted is the entire joke: zero setup, instant recognition for anyone who's caught themselves doing it. It's DM/group-chat virality, not algorithm virality. The more specific the in-joke, the more taggable it is." },
     therapy: { title:"My Kind Of Therapy", ribbon:"All-Time #2", tag1:"Reel", tag2:"@tedkyarieh_ &times; Mascardi",
-      synopsis:"POV footage of a hard acceleration run ('pull') in a BMW X4, reframed as stress relief — 706K views, and Mascardi-tagged so it doubles as inventory content. Also outside the trailing-90-day window.",
+      synopsis:"POV footage of a hard acceleration run ('pull') in a BMW X4, reframed as stress relief. 706K views, and Mascardi-tagged so it doubles as inventory content. Also outside the trailing-90-day window.",
       stats:[["706K","Views"],["461.8K","Reach"],["52.2K","Likes"]], date:"2026-01-23", dateLabel:"23 Jan",
       permalink:"https://www.instagram.com/reel/DT3N0lCiDsR/",
-      reelMetrics:{watch:"21.5s", saved:1586, shares:1992}, note:"'Pull' is local slang for a hard acceleration run — the caption assumes the audience already speaks that shorthand. Pairs a visceral, sound-led driving clip with a universal emotional hook (stress relief) so it needs no dialogue to land, while the BMW X4 and Mascardi tag quietly do inventory work in the background." }
+      reelMetrics:{watch:"21.5s", saved:1586, shares:1992}, note:"'Pull' is local slang for a hard acceleration run, the caption assumes the audience already speaks that shorthand. Pairs a visceral, sound-led driving clip with a universal emotional hook (stress relief) so it needs no dialogue to land, while the BMW X4 and Mascardi tag quietly do inventory work in the background." }
   };
   // Drop compressed clips in videos/sedana-{key}.mp4 — plays inline via the video modal below, no code changes needed.
   var SEDANA = [
-    { key:"sed2", title:"Harriet Bella", subtitle:"Sedana — Masshouse Launch Event · 27 June 2026", role:"Freelance Video Production & Editing · Jun 2026", brief:"Event coverage from Sedana's Masshouse launch, in partnership with Jgadget Solaaris and Harriet Bella.", videoSrc:"videos/sedana-sed2.mp4" },
-    { key:"sed1", title:"Jgadget Solaaris", subtitle:"Sedana — Masshouse Launch Event · 27 June 2026", role:"Freelance Video Production & Editing · Jun 2026", brief:"Event coverage from Sedana's Masshouse launch, in partnership with Jgadget Solaaris and Harriet Bella.", videoSrc:"videos/sedana-sed1.mp4" },
-    { key:"sed3", title:"Solaariss", subtitle:"Sedana — Masshouse Launch Event · 27 June 2026", role:"Freelance Video Production & Editing · Jun 2026", brief:"Event coverage from Sedana's Masshouse launch, in partnership with Jgadget Solaaris and Harriet Bella.", videoSrc:"videos/sedana-sed3.mp4" }
+    { key:"sed2", title:"Harriet Bella", subtitle:"Sedana: Masshouse Launch Event · 27 June 2026", role:"Freelance Video Production & Editing · Jun 2026", brief:"Event coverage from Sedana's Masshouse launch, in partnership with Jgadget Solaaris and Harriet Bella.", videoSrc:"videos/sedana-sed2.mp4" },
+    { key:"sed1", title:"Jgadget Solaaris", subtitle:"Sedana: Masshouse Launch Event · 27 June 2026", role:"Freelance Video Production & Editing · Jun 2026", brief:"Event coverage from Sedana's Masshouse launch, in partnership with Jgadget Solaaris and Harriet Bella.", videoSrc:"videos/sedana-sed1.mp4" },
+    { key:"sed3", title:"Solaariss", subtitle:"Sedana: Masshouse Launch Event · 27 June 2026", role:"Freelance Video Production & Editing · Jun 2026", brief:"Event coverage from Sedana's Masshouse launch, in partnership with Jgadget Solaaris and Harriet Bella.", videoSrc:"videos/sedana-sed3.mp4" }
   ];
 
   
 
   var SKILLS = [
-    { g:"📱", t:"Content", s:"Stories people finish.", c1:"#3a2f14", c2:"#6b551f" },
-    { g:"🎥", t:"Editing", s:"Designed for retention.", c1:"#1c2b3a", c2:"#2f5270" },
-    { g:"💬", t:"Community", s:"Comments become customers.", c1:"#2a1c34", c2:"#523a63" },
-    { g:"📊", t:"Strategy", s:"Built around discovery.", c1:"#123125", c2:"#1f5b40" },
-    { g:"🤝", t:"Sales", s:"Consultative, not pushy.", c1:"#331a1a", c2:"#5e2e2e" }
+    { g:"📱", t:"Content", s:"Stories people finish." },
+    { g:"🎥", t:"Editing", s:"Designed for retention." },
+    { g:"💬", t:"Community", s:"Comments become customers." },
+    { g:"📊", t:"Strategy", s:"Built around discovery." },
+    { g:"🤝", t:"Sales", s:"Consultative, not pushy." }
   ];
 
   function bgUrl(key){ return 'url(images/' + key + '.jpg)'; }
 
   function tileHTML(key){
     var d = DATA[key];
-    return '<div class="tile" id="tile-'+key+'" tabindex="0" data-key="'+key+'" role="button" aria-label="'+d.title+' — more info">'+
+    return '<div class="tile" id="tile-'+key+'" tabindex="0" data-key="'+key+'" role="button" aria-label="'+d.title+', more info">'+
       '<div class="tile-img" style="background-image:'+bgUrl(key)+'"></div>'+
       '<div class="tile-scrim"></div>'+
       '<div class="tile-badge">'+(d.tag1==='Reel'?'&#9654; ':'&#8862; ')+d.ribbon.replace('🏆 ','').replace(' · Trailing 90 days','')+'</div>'+
@@ -739,26 +754,24 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
     '</div>';
   }
 
-  var rowM = document.getElementById('rowMascardi');
-  ['m1','m2','m3','m4','m5'].forEach(function(k){ rowM.insertAdjacentHTML('beforeend', tileHTML(k)); });
-
-  var rowP = document.getElementById('rowPersonal');
-  ['p1','p2','p3','p4'].forEach(function(k){ rowP.insertAdjacentHTML('beforeend', tileHTML(k)); });
-
-  var rowPAll = document.getElementById('rowPersonalAllTime');
-  ['kikuyu','therapy'].forEach(function(k){ rowPAll.insertAdjacentHTML('beforeend', tileHTML(k)); });
-
   var rowS = document.getElementById('rowSkills');
   SKILLS.forEach(function(s){
     rowS.insertAdjacentHTML('beforeend',
-      '<div class="genre-tile" style="background:linear-gradient(155deg,'+s.c1+','+s.c2+')">'+
+      '<div class="genre-tile capability-tile">'+
       '<div class="glyph">'+s.g+'</div><div>'+s.t+'</div><div class="sub">'+s.s+'</div><div class="accent-bar"></div></div>');
   });
 
-  var rowSed = document.getElementById('rowSedana');
+  // Single Netflix-style preview card: cross-fades the first ~5s of each Sedana clip,
+  // muted/looped like the other big tiles. Tapping it opens the clip picker below —
+  // the individual clips there are static (no autoplay) until you pick one to watch.
+  initTileLoop(document.getElementById('sedanaPreview'), SEDANA.map(function(s){
+    return { type:'video', src:s.videoSrc, poster:'images/'+s.key+'.jpg', duration:5000 };
+  }));
+
+  var rowSedClips = document.getElementById('sedanaClipsRow');
   SEDANA.forEach(function(s){
-    rowSed.insertAdjacentHTML('beforeend',
-      '<div class="tile" tabindex="0" data-video-key="'+s.key+'" role="button" aria-label="'+s.title+' — play video">'+
+    rowSedClips.insertAdjacentHTML('beforeend',
+      '<div class="tile" tabindex="0" data-video-key="'+s.key+'" role="button" aria-label="'+s.title+', watch with sound">'+
       '<div class="tile-img" style="background-image:'+bgUrl(s.key)+'"></div>'+
       '<div class="tile-scrim"></div>'+
       '<div class="tile-badge">Sedana</div>'+
@@ -767,12 +780,17 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
       '<div class="tile-meta"><span>'+s.subtitle+'</span></div></div>'+
       '</div>');
   });
+  // Direct listener per tile, in addition to the document-level delegation — belt and
+  // suspenders so opening the clip never depends on bubbling through anything else on the page.
+  rowSedClips.querySelectorAll('[data-video-key]').forEach(function(tile){
+    tile.addEventListener('click', function(){ openVideoModal(tile.getAttribute('data-video-key')); });
+  });
 
   var LOOP = [
-    { t:"Observe", d:"Study what's already working — the account's own data and the wider niche — before shooting anything." },
+    { t:"Observe", d:"Study what's already working, the account's own data and the wider niche, before shooting anything." },
     { t:"Shoot", d:"Capture with intent, solo, POV-first. Every piece shot and edited independently." },
     { t:"Edit", d:"Cut for retention in CapCut and Lightroom. Hook in the first second or it doesn't ship." },
-    { t:"Publish", d:"Consistent cadence, on-brand voice, scheduled — not sporadic." },
+    { t:"Publish", d:"Consistent cadence, on-brand voice, scheduled, not sporadic." },
     { t:"Engage", d:"DMs and comments treated as leads to route into the pipeline, not vanity metrics." },
     { t:"Measure", d:"Monthly reporting on reach and discovery, not just follower count." },
     { t:"Repeat", d:"Feed what worked back into the next Observe. That's the loop." }
@@ -783,27 +801,12 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
       '<div class="loop-step"><div class="n">'+String(i+1).padStart(2,'0')+'</div><h3>'+s.t+'</h3><p>'+s.d+'</p></div>');
   });
 
-  var CRAFT = [
-    { g:"\u{1F305}", t:"Golden hour on the showroom floor.", s:"Waiting for the light that makes a G-Wagon look like a movie still.", c1:"#3a2f14", c2:"#6b551f" },
-    { g:"\u{1F4AC}", t:"Reading the comments like a focus group.", s:"Every DM and comment is data, not noise.", c1:"#2a1c34", c2:"#523a63" },
-    { g:"\u{1F3AC}", t:"One more take before the light's gone.", s:"Never the first take when there's time for a better one.", c1:"#1c2b3a", c2:"#2f5270" },
-    { g:"\u{1F5A5}", t:"Grading after the shop closes.", s:"CapCut and Lightroom, solo, until the frame feels right.", c1:"#123125", c2:"#1f5b40" },
-    { g:"\u{1F4CA}", t:"Checking the numbers every morning.", s:"Reach over vanity — the account doesn't lie.", c1:"#331a1a", c2:"#5e2e2e" },
-    { g:"\u{1F501}", t:"Always planning the next post.", s:"The loop doesn't stop at publish.", c1:"#1a1a33", c2:"#33335e" }
-  ];
-  var rowCraft = document.getElementById('rowCraft');
-  CRAFT.forEach(function(s){
-    rowCraft.insertAdjacentHTML('beforeend',
-      '<div class="genre-tile" style="background:linear-gradient(155deg,'+s.c1+','+s.c2+')">'+
-      '<div class="glyph">'+s.g+'</div><div>'+s.t+'</div><div class="sub">'+s.s+'</div><div class="accent-bar"></div></div>');
-  });
-
   var TIMELINE = [
     { act:"Jul 2025", h:"Joined Mascardi Luxury Cars", p:"Started as Digital Marketing Lead & Commercial Executive with roughly 56,000 Instagram followers and sporadic posting." },
     { act:"Jan–May 2026", h:"5.01M Views, 303 Pieces Produced", p:"Five straight months of consistent posting, non-follower reach holding above half of all views nearly every month." },
-    { act:"21 May 2026", h:"Personal Account Goes Viral", p:"A @tedkyarieh_ reel crosses 1.03M views and 4K+ shares — proof the growth playbook travels beyond one dealership." },
-    { act:"27 Jun 2026", h:"Sedana — Masshouse Launch Event", p:"Freelance video production and editing for a live launch event, in partnership with Jgadget Solaaris and Harriet Bella." },
-    { act:"Jul 2026", h:"70,880 Followers, Still Climbing", p:"Mascardi crosses 70.9K followers — up from 56K at the start, discovery over inheritance the whole way." }
+    { act:"21 May 2026", h:"Personal Account Goes Viral", p:"A @tedkyarieh_ reel crosses 1.03M views and 4K+ shares, proof the growth playbook travels beyond one dealership." },
+    { act:"27 Jun 2026", h:"Sedana: Masshouse Launch Event", p:"Freelance video production and editing for a live launch event, in partnership with Jgadget Solaaris and Harriet Bella." },
+    { act:"Jul 2026", h:"70,880 Followers, Still Climbing", p:"Mascardi crosses 70.9K followers, up from 56K at the start, discovery over inheritance the whole way." }
   ];
   var timelineArc = document.getElementById('timelineArc');
   TIMELINE.forEach(function(step){
@@ -811,21 +814,7 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
       '<div class="mp-step"><p class="act">'+step.act+'</p><h3>'+step.h+'</h3><p>'+step.p+'</p></div>');
   });
 
-  // ---------- Mascardi tile media-loop (Porsche-forward: recent Porsche posts + delivery footage) ----------
-  var MASCARDI_LOOP = [
-    { type:'video', src:'videos/porsche-2.mp4', duration:5000 },
-    { type:'video', src:'videos/delivery-1.mp4', duration:5000 },
-    { type:'video', src:'videos/porsche-4.mp4', duration:5000 },
-    { type:'video', src:'videos/delivery-2.mp4', duration:5000 },
-    { type:'video', src:'videos/porsche-1.mp4', duration:5000 },
-    { type:'video', src:'videos/delivery-3.mp4', duration:5000 },
-    { type:'video', src:'videos/porsche-3.mp4', duration:5000 },
-    { type:'video', src:'videos/delivery-4.mp4', duration:5000 },
-    { type:'image', src:'images/porsche-cayenne.jpg', duration:4000 },
-    { type:'video', src:'videos/delivery-5.mp4', duration:5000 }
-  ];
-
-  // ---------- Personal tile media-loop (best-performing @tedkyarieh_ reels) ----------
+  // ---------- Personal hero background loop (best-performing @tedkyarieh_ reels) ----------
   var PERSONAL_LOOP = [
     { type:'video', src:'videos/personal-1.mp4', duration:5000 },
     { type:'video', src:'videos/personal-2.mp4', duration:5000 },
@@ -838,7 +827,18 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
     var layerA = document.createElement('div'); layerA.className = 'tile-loop-layer active';
     var layerB = document.createElement('div'); layerB.className = 'tile-loop-layer';
     container.appendChild(layerA); container.appendChild(layerB);
-    var usingLayerA = true, idx = 0, activeVideo = null, inView = true, paused = false, timerId = null;
+    // inView is computed synchronously from the real layout, not assumed — the very first
+    // paint() call below runs before the IntersectionObserver has ever reported anything, and
+    // every tile-loop on the page fires that first paint on load. Assuming true meant every
+    // video (even ones far below the fold) tried to buffer/play at once; assuming false meant
+    // even the hero video sitting right at the top on load had to wait on the observer's first
+    // async callback instead of just starting immediately. Checking the actual bounding rect
+    // gets both right: whatever's genuinely on screen at load starts with zero delay, and
+    // anything off-screen correctly waits for the observer below.
+    var initialRect = container.getBoundingClientRect();
+    var usingLayerA = true, idx = 0, activeVideo = null,
+        inView = initialRect.top < window.innerHeight && initialRect.bottom > 0,
+        paused = false, timerId = null;
 
     function paint(item){
       var next = usingLayerA ? layerB : layerA, prev = usingLayerA ? layerA : layerB;
@@ -848,7 +848,12 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
       activeVideo = null;
       if(item.type === 'video'){
         var v = document.createElement('video');
-        v.muted = true; v.loop = true; v.playsInline = true; v.autoplay = true; v.preload = 'auto';
+        // Set both the IDL property AND the content attribute for muted/playsinline/autoplay —
+        // some engines check the attribute (present at parse time) rather than the live
+        // property when deciding whether muted-autoplay is allowed without a user gesture, so
+        // relying on the property alone can silently lose the exemption on stricter setups.
+        v.muted = true; v.loop = true; v.playsInline = true; v.autoplay = true; v.preload = 'metadata';
+        v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('autoplay', ''); v.setAttribute('loop', '');
         v.poster = item.poster || item.src.replace('videos/', 'images/posters/').replace(/\.mp4$/, '.jpg');
         var s = document.createElement('source'); s.src = item.src; s.type = 'video/mp4';
         v.appendChild(s);
@@ -860,6 +865,11 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
         if(item.fit) next.style.backgroundSize = item.fit;
       }
       next.classList.add('active'); prev.classList.remove('active');
+      // The outgoing layer keeps its old video element until the layer is reused two
+      // swaps from now — without an explicit pause it would keep decoding in the
+      // background at opacity:0 the whole time, doubling video decode cost mid-crossfade.
+      var outgoingVideo = prev.querySelector('video');
+      if(outgoingVideo) outgoingVideo.pause();
       usingLayerA = !usingLayerA;
     }
 
@@ -876,12 +886,16 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
     scheduleNext();
 
     if('IntersectionObserver' in window){
+      // threshold 0.6: a section needs to genuinely dominate the screen before its video
+      // starts — not just peek 15% into view at the bottom edge while you're still reading
+      // the section above it. That peeking-video-already-playing effect was the main
+      // complaint; this makes each page's preview wait until you've actually arrived.
       new IntersectionObserver(function(entries){
         entries.forEach(function(entry){
           inView = entry.isIntersecting;
           if(activeVideo){ if(inView && !paused) activeVideo.play().catch(function(){}); else activeVideo.pause(); }
         });
-      }, { threshold: 0.15 }).observe(container);
+      }, { threshold: 0.6 }).observe(container);
     }
 
     return {
@@ -890,31 +904,63 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
     };
   }
 
-  initTileLoop(document.querySelector('#cardMascardi .campaign-img'), MASCARDI_LOOP);
-  initTileLoop(document.querySelector('#cardPersonal .campaign-img'), PERSONAL_LOOP);
+  // Static <video autoplay muted loop playsinline> declared directly in the HTML (not created
+  // via JS) for the two single-clip heroes — the browser's own autoplay handling takes the very
+  // first play attempt, which is markedly more reliable across browsers (notably iOS Safari)
+  // than a video element built and inserted by script. This function only owns pausing and
+  // resuming it as it scrolls in and out of view, mirroring initTileLoop's pause/resume shape
+  // so the rest of the code (wireHeroToggle, etc.) doesn't need to know the difference.
+  function initStaticVideo(container){
+    var v = container.querySelector('video');
+    if(!v) return null;
+    var initialRect = container.getBoundingClientRect();
+    var inView = initialRect.top < window.innerHeight && initialRect.bottom > 0;
+    var paused = false;
+    if('IntersectionObserver' in window){
+      new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          inView = entry.isIntersecting;
+          if(inView && !paused) v.play().catch(function(){});
+          else v.pause();
+        });
+      }, { threshold: 0.6 }).observe(container);
+    }
+    return {
+      pause: function(){ paused = true; v.pause(); },
+      resume: function(){ paused = false; if(inView) v.play().catch(function(){}); }
+    };
+  }
 
   // ---------- Authority hero video (the "introduces Ted" intro section) ----------
-  var AUTHORITY_LOOP = [
-    { type:'video', src:'videos/authority-hero.mp4', duration:8000 }
-  ];
-  initTileLoop(document.getElementById('authorityVideo'), AUTHORITY_LOOP);
+  initStaticVideo(document.getElementById('authorityVideo'));
 
   // ---------- Hero background video (Mascardi — plays in full, single clip) ----------
-  var HERO_LOOP = [
-    { type:'video', src:'videos/hero-mascardi.mp4', duration:15000 }
-  ];
-  var heroLoopCtrl = initTileLoop(document.getElementById('heroVideo'), HERO_LOOP);
-  var playing = true;
-  var playToggle = document.getElementById('heroPlayToggle');
+  var heroLoopCtrl = initStaticVideo(document.getElementById('heroVideo'));
+  var personalHeroLoopCtrl = initTileLoop(document.getElementById('personalHeroVideo'), PERSONAL_LOOP);
 
-  playToggle.textContent = '❬❬';
-  playToggle.setAttribute('aria-label', 'Pause background video');
-
-  playToggle.addEventListener('click', function(){
-    playing = !playing;
-    if (playing) { playToggle.textContent = '❬❬'; playToggle.setAttribute('aria-label','Pause background video'); if(heroLoopCtrl) heroLoopCtrl.resume(); }
-    else { playToggle.textContent = '▶'; playToggle.setAttribute('aria-label','Play background video'); if(heroLoopCtrl) heroLoopCtrl.pause(); }
-  });
+  // Both big hero tiles (Mascardi + Personal) use the same play/pause pattern: reflect the
+  // video's real paused state rather than an assumed one, so the button never gets stuck out
+  // of sync with the video (see [[portfolio_video_redesign]] toggle-bug fix).
+  function wireHeroToggle(videoContainerId, toggleId, loopCtrl){
+    var toggle = document.getElementById(toggleId);
+    function sync(){
+      var v = document.querySelector('#' + videoContainerId + ' video');
+      var isPlaying = v && !v.paused;
+      toggle.textContent = isPlaying ? '❬❬' : '▶';
+      toggle.setAttribute('aria-label', isPlaying ? 'Pause background video' : 'Play background video');
+    }
+    var videoEl = document.querySelector('#' + videoContainerId + ' video');
+    if(videoEl){ videoEl.addEventListener('play', sync); videoEl.addEventListener('pause', sync); }
+    sync();
+    toggle.addEventListener('click', function(){
+      var v = document.querySelector('#' + videoContainerId + ' video');
+      if(!v) return;
+      if (v.paused) { v.play().catch(function(){}); if(loopCtrl) loopCtrl.resume(); }
+      else { v.pause(); if(loopCtrl) loopCtrl.pause(); }
+    });
+  }
+  wireHeroToggle('heroVideo', 'heroPlayToggle', heroLoopCtrl);
+  wireHeroToggle('personalHeroVideo', 'personalHeroPlayToggle', personalHeroLoopCtrl);
 
   // ---------- Modal (shared by episode tiles + ranked items) ----------
   function openModal(key){
@@ -969,25 +1015,55 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
     if(overlay._trigger && overlay._trigger.focus) overlay._trigger.focus();
   }
 
-  // ---------- Video modal (Sedana clips play inline instead of linking out) ----------
-  function findSedana(key){
+  // ---------- Reel showcase data (Built From Zero case study) ----------
+  // Real reels Ted picked out himself, ranked by actual lifetime views (pulled live from
+  // Instagram), each with a short read on why it performed the way it did.
+  var PERSONAL_REELS = [
+    { key:'reel-kikuyu', title:"The Kikuyu Accent Be Attacking Randomly", views:"1.82M", videoSrc:'videos/personal-kikuyu.mp4', poster:'images/posters/personal-kikuyu-poster.jpg', permalink:'https://www.instagram.com/reel/DWCZ8MbiPM5/',
+      insight:"69.4K shares against 153K likes, a roughly 45% share-to-like ratio when most posts run 5–10%. People weren't just liking it, they were tagging a specific friend by name. Zero setup, instant recognition, pure DM virality." },
+    { key:'reel-p1', title:"I Know I'm Not The Only One", views:"1.03M", videoSrc:'videos/personal-p1.mp4', poster:'images/posters/personal-p1-poster.jpg', permalink:'https://www.instagram.com/reel/DYmzFqHI-ph/',
+      insight:"No dialogue, no CTA, just pure relatability. Over 4,000 shares suggests it traveled through DMs more than the algorithm." },
+    { key:'reel-twin', title:"Top Experiences We Gotta Have, Twin", views:"628.8K", videoSrc:'videos/personal-twin.mp4', poster:'images/posters/personal-twin-poster.jpg', permalink:'https://www.instagram.com/reel/DXsFIYiiIgI/',
+      insight:"23.2K shares on 628K views, one of the highest share rates on the account. Listicle-style relatable content travels because everyone tags the friend who needs to see it." },
+    { key:'reel-itbelike', title:"It Really Be Like That", views:"480.9K", videoSrc:'videos/personal-itbelike.mp4', poster:'images/posters/personal-itbelike-poster.jpg', permalink:'https://www.instagram.com/reel/DXw6B-JoA8Q/',
+      insight:"A pure reaction-format joke, no explanation needed. Nearly 6,000 shares on a one-line caption shows the footage did all the work." },
+    { key:'reel-fuel', title:"The Most Expensive Place I Know", views:"399.1K", videoSrc:'videos/personal-fuel.mp4', poster:'images/posters/personal-fuel-poster.jpg', permalink:'https://www.instagram.com/reel/DYXen8qI4nj/',
+      insight:"Fuel prices are a universal frustration right now. Almost 11,000 shares off a single relatable complaint, proof a shared pain point travels faster than car content alone." },
+    { key:'reel-nostalgia', title:"The Kid In Me", views:"273.6K", videoSrc:'videos/personal-nostalgia.mp4', poster:'images/posters/personal-nostalgia-poster.jpg', permalink:'https://www.instagram.com/reel/DV3Ae91CPsj/',
+      insight:"A nostalgia hook broadens the audience past car-culture regulars. Strong watch-through even without the huge share count of the comedy reels." },
+    { key:'reel-povsetup', title:"Quick DIY Setup To Record Driver's POV", views:"43.8K", videoSrc:'videos/personal-povsetup.mp4', poster:'images/posters/personal-povsetup-poster.jpg', permalink:'https://www.instagram.com/reel/DV8wM6ViGpu/',
+      insight:"Behind-the-scenes content pulls a smaller but higher-intent audience: people who want to learn the process, not just watch the result. Save rate here is notably strong relative to views." },
+    { key:'reel-parking', title:"Reverse Parking Tutorial", views:"20.7K", videoSrc:'videos/personal-parking.mp4', poster:'images/posters/personal-parking-poster.jpg', permalink:'https://www.instagram.com/reel/DR67wkICK6F/',
+      insight:"A straight how-to. Lower reach than the comedy reels, but tutorials build a different kind of trust, viewers come back because the content is useful, not just entertaining." },
+    { key:'reel-discount', title:"What A 5% Discount At Mascardi Gets You", views:"18.2K", videoSrc:'videos/personal-discount.mp4', poster:'images/posters/personal-discount-poster.jpg', permalink:'https://www.instagram.com/reel/DXZXq9iiIFC/',
+      insight:"A Mascardi-tagged promo breakdown. Lower organic reach than the personal-brand comedy content, expected since it's inventory-focused rather than pure entertainment, but it shows the crossover between the two accounts." },
+    { key:'reel-b58', title:"Why Kenyans Love BMW's B58 Engine", views:"11.0K", videoSrc:'videos/personal-b58.mp4', poster:'images/posters/personal-b58-poster.jpg', permalink:'https://www.instagram.com/reel/DYPbkiIIe5Q/',
+      insight:"A straight engine breakdown for enthusiasts specifically. Smaller audience by design, this is content for people already deep in car culture, not built for reach." }
+  ];
+
+  // ---------- Video modal (Sedana clips + personal reels play inline instead of linking out) ----------
+  function findClip(key){
     for(var i=0;i<SEDANA.length;i++){ if(SEDANA[i].key === key) return SEDANA[i]; }
     return null;
   }
 
   function openVideoModal(key){
-    var s = findSedana(key);
+    var s = findClip(key);
     if(!s) return;
     var media = document.getElementById('videoModalMedia');
     media.innerHTML = '<button class="modal-close" id="videoModalClose" aria-label="Close">&#10005;</button>'+
-      '<video controls playsinline preload="metadata" poster="images/'+key+'.jpg">'+
+      '<video controls playsinline preload="metadata" poster="'+(s.poster || ('images/'+key+'.jpg'))+'">'+
       '<source src="'+s.videoSrc+'" type="video/mp4"></video>';
     document.getElementById('videoModalTag').textContent = s.title;
-    document.getElementById('videoModalBrief').textContent = s.role + ' — ' + s.brief;
+    document.getElementById('videoModalBrief').textContent = s.role ? (s.role + ' · ' + s.brief) : s.insight;
     var overlay = document.getElementById('videoModalOverlay');
     overlay.classList.add('open');
     overlay._trigger = document.activeElement;
     document.body.style.overflow = 'hidden';
+    // Play immediately with sound — this call is still inside the same click that opened
+    // the modal, so it counts as a user gesture and doesn't need a second tap on the native
+    // play button.
+    media.querySelector('video').play().catch(function(){});
   }
 
   function closeVideoModal(){
@@ -1008,21 +1084,22 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
       title: 'Mascardi Luxury Cars',
       role: 'Digital Marketing Lead & Commercial Executive · Jul 2025–Present',
       stats: [['5.01M','Views / 5 months'],['303','Pieces produced'],['57%','Avg. non-follower reach']],
-      anchor: 'campaign-mascardi',
+      instagram: 'https://instagram.com/mascardi.cars',
       arc: [
-        { act:'The Starting Point', h:"An Established Dealership, an Inconsistent Feed", p:"When the role began in July 2025, Mascardi Luxury Cars already had a loyal customer base and roughly 56,000 Instagram followers — but posting was sporadic, and reach mostly circled the same existing audience. The dealership had visibility. What it didn't have was discovery." },
-        { act:'The Challenge', h:"Growth That Doesn't Just Recycle the Same Audience", p:"Follower count alone doesn't move inventory. If every view came from people who already followed the page, the ceiling on new leads was fixed. The real target was reach beyond the existing base — proof the content itself could pull in buyers who didn't know Mascardi yet." },
-        { act:'The Approach', h:"Cadence, Consistency, and a Pipeline Back to Sales", p:"The plan: publish consistently — vehicle reveals, handovers, lifestyle features — on a steady brand voice (“Always a Mascardi”), scheduled through Meta Business Suite, and treat every comment and DM as a lead to route into the sales pipeline, not a vanity metric." },
-        { act:'Execution', h:"303 Pieces of Content in Five Months", p:"154 Reels and 149 carousels went out at roughly 60 posts a month, shot and edited in CapCut and Adobe Lightroom. Captions and campaign copy stayed on-brand throughout, while daily community engagement fed qualified leads into the commercial side of the role: full customer journeys from inquiry to delivery." },
-        { act:'Results', h:"56K to 70.9K Followers, 5.01M Views, Discovery Over Inheritance", p:"Non-follower reach held between 55% and 66% of views every month from January through May — most of that 5.01M wasn't circling the existing audience, it was finding a new one. Non-follower reach peaked at 66% in March; by May the account was clearing over a million views a month." },
-        { act:'The Takeaway', h:"Growth Was Structural, Not a Lucky Post", p:"A single viral reel can be luck. Five straight months of non-follower reach above half is a pattern — evidence the growth came from a repeatable system, not an accident. That's the exact question the next case study exists to answer." }
+        { act:'The Starting Point', h:"An Established Dealership, an Inconsistent Feed", p:"When the role began in July 2025, Mascardi Luxury Cars already had a loyal customer base and roughly 56,000 Instagram followers, but posting was sporadic, and reach mostly circled the same existing audience. The dealership had visibility. What it didn't have was discovery." },
+        { act:'The Challenge', h:"Growth That Doesn't Just Recycle the Same Audience", p:"Follower count alone doesn't move inventory. If every view came from people who already followed the page, the ceiling on new leads was fixed. The real target was reach beyond the existing base, showing the content itself could pull in buyers who didn't know Mascardi yet." },
+        { act:'The Approach', h:"Cadence, Consistency, and a Pipeline Back to Sales", p:"The plan: publish consistently, vehicle reveals, handovers, lifestyle features, on a steady brand voice (“Always a Mascardi”), scheduled through Meta Business Suite, and treat every comment and DM as a lead to route into the sales pipeline, not a vanity metric." },
+        { act:'Execution', h:"303 Pieces of Content in Five Months", p:"154 Reels and 149 carousels went out at roughly 60 posts a month, shot and edited in CapCut and Adobe Lightroom. Captions and campaign copy stayed on-brand throughout, while daily community engagement fed qualified leads into the commercial side of the role, full customer journeys from inquiry to delivery." },
+        { act:'Results', h:"56K to 70.9K Followers, 5.01M Views, Discovery Over Inheritance", p:"Non-follower reach held between 55% and 66% of views every month from January through May. Most of that 5.01M wasn't circling the existing audience, it was finding a new one. Non-follower reach peaked at 66% in March; by May the account was clearing over a million views a month." },
+        { act:'The Takeaway', h:"Growth Was Structural, Not a Lucky Post", p:"A single viral reel can be luck. Five straight months of non-follower reach above half is a pattern. That's evidence the growth came from a repeatable system, not an accident, and it's the exact question the next case study exists to answer." }
       ],
       pillars: [
-        { name:"Skits & Relatable Humor", tagline:"Built for shares, not hard sells.", posts:["hum1","m2","hum2","hum3"] },
-        { name:"Delivery & Sales Wins", tagline:"The inventory content that actually moves cars.", posts:["m3","del1","m4"] },
-        { name:"Community & Culture", tagline:"The people behind the dealership, not just the cars.", posts:["com1","com2","com3"] },
-        { name:"Reviews & Spec Breakdowns", tagline:"Straight product info, still on-brand.", posts:["rev1","m1"] }
-      ]
+        { name:"Deliveries", tagline:"Buying a car should be an experience made to remember.", posts:["del1","m4"] },
+        { name:"Move with Mascardi", tagline:"Pilates and Porsche, the wellness-meets-automotive event Mascardi ran, marketed and covered end to end.", placeholder:"Recap & photos in production" },
+        { name:"Skits & Educational Content", tagline:"Built for shares, and straight product info that still sounds like Mascardi.", posts:["hum1","m2","hum2","hum3","rev1","m1"] },
+        { name:"Community & Culture", tagline:"The people behind the dealership, not just the cars.", posts:["com1","com2","com3"] }
+      ],
+      mostViewed: ["m1","m2","m3","m4","m5"]
     },
     personal: {
       cover: 'p1',
@@ -1030,15 +1107,9 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
       title: 'Built From Zero',
       role: 'Independent Personal Brand · @tedkyarieh_ · 2025–Present',
       stats: [['5.54M','Views / 90 days'],['2.65M','Accounts reached'],['+40%','Reach, QoQ']],
-      anchor: 'campaign-personal',
-      arc: [
-        { act:'The Starting Point', h:"Zero Following, No Safety Net", p:"@tedkyarieh_ launched in 2025 with no inherited audience, no dealership brand behind it, and no existing following to draw views from — the opposite starting position of the Mascardi account." },
-        { act:'The Challenge', h:"Prove the Playbook, Not the Employer", p:"The open question after Mascardi was simple: did that growth come from the dealership's brand, or from the process behind it? The only honest way to answer it was to run the same approach from zero and see if the numbers held." },
-        { act:'The Approach', h:"Same Discipline, POV Car-Culture Niche", p:"Short-form POV driving and car-culture content, written, shot and edited independently — no team, no budget, same discovery-first thinking as the dealership account: build content designed to travel past the people who already follow you." },
-        { act:'Execution', h:"Self-Shot, Self-Edited, Reels-First", p:"Every post in the trailing 90 days was produced solo. 98.8% of account views came specifically from Reels — the format doing almost all of the work, exactly as the strategy intended." },
-        { act:'Results', h:"5.54M Views, 2.65M Accounts Reached, +40% QoQ", p:"In 90 days, starting from nothing, the account reached 2.65 million accounts and crossed one video past 1 million views organically — reach growing 40% quarter-on-quarter with no paid promotion behind it." },
-        { act:'The Takeaway', h:"The Skill Travels — That's the Point", p:"Two accounts, one playbook, comparable results from opposite starting points. That's the evidence this isn't dealership-specific luck — it's a transferable growth skill, ready for the next vertical: lifestyle, hospitality, or any brand with an audience worth earning." }
-      ]
+      instagram: 'https://instagram.com/tedkyarieh_',
+      intro: "No inherited following, no dealership brand behind it. Every reel below is picked out and ranked by real lifetime views, highest to lowest, with a short read on why each one landed the way it did.",
+      reelShowcase: PERSONAL_REELS
     }
   };
 
@@ -1052,23 +1123,81 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
     var statsEl = document.getElementById('mpStats');
     statsEl.innerHTML = m.stats.map(function(s){ return '<div><div class="v">'+s[0]+'</div><div class="l">'+s[1]+'</div></div>'; }).join('');
     statsEl.querySelectorAll('.v').forEach(animateCount);
+
     var arcEl = document.getElementById('mpArc');
-    arcEl.innerHTML = m.arc.map(function(step){
-      return '<div class="mp-step"><p class="act">'+step.act+'</p><h3>'+step.h+'</h3><p>'+step.p+'</p></div>';
-    }).join('');
     var pillarsEl = document.getElementById('mpPillars');
-    pillarsEl.innerHTML = (m.pillars || []).map(function(pillar){
-      return '<div class="mp-pillar"><p class="mp-pillar-eyebrow">'+pillar.name+'</p><p class="mp-pillar-tagline">'+pillar.tagline+'</p>'+
-        '<div class="row-scroll">'+pillar.posts.map(tileHTML).join('')+'</div></div>';
-    }).join('');
-    var cta = document.getElementById('mpCta');
-    cta.setAttribute('data-anchor', m.anchor);
+    var mostViewedEl = document.getElementById('mpMostViewed');
+    var showcaseEl = document.getElementById('mpReelShowcase');
+
+    if(m.reelShowcase){
+      // Reel-forward layout (Built From Zero): the video and a short "why it worked" read
+      // come first, ranked highest views to lowest, instead of a wall of narrative text with
+      // clips buried at the bottom.
+      arcEl.style.display = 'none'; arcEl.innerHTML = '';
+      pillarsEl.style.display = 'none'; pillarsEl.innerHTML = '';
+      mostViewedEl.style.display = 'none'; mostViewedEl.innerHTML = '';
+      showcaseEl.style.display = '';
+      showcaseEl.innerHTML = (m.intro ? '<p class="mp-showcase-intro">'+m.intro+'</p>' : '') +
+        m.reelShowcase.map(function(reel, i){
+          return '<div class="reel-item">'+
+            '<div class="reel-media">'+
+              '<div class="reel-rank">#'+(i+1)+'</div>'+
+              '<div class="tile-video" id="showcase-'+reel.key+'" data-ig-permalink="'+reel.permalink+'" role="button" tabindex="0" aria-label="'+reel.title+', watch the full reel on Instagram"></div>'+
+            '</div>'+
+            '<div class="reel-copy">'+
+              '<p class="reel-views">'+reel.views+' <span>views</span></p>'+
+              '<h3 class="reel-title">'+reel.title+'</h3>'+
+              '<p class="reel-insight">'+reel.insight+'</p>'+
+              '<a class="reel-permalink" href="'+reel.permalink+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">View on Instagram &#8599;</a>'+
+            '</div>'+
+          '</div>';
+        }).join('');
+      // Layout must be real (not display:none) before computing initial visibility, so this
+      // runs after the overlay is opened below, not here.
+    } else {
+      showcaseEl.style.display = 'none'; showcaseEl.innerHTML = '';
+      arcEl.style.display = '';
+      arcEl.innerHTML = (m.arc || []).map(function(step){
+        return '<div class="mp-step"><p class="act">'+step.act+'</p><h3>'+step.h+'</h3><p>'+step.p+'</p></div>';
+      }).join('');
+      pillarsEl.style.display = '';
+      pillarsEl.innerHTML = (m.pillars || []).map(function(pillar){
+        var body = pillar.placeholder
+          ? '<div class="tile tile-placeholder"><div class="tile-img"><span class="tile-icon">&#128247;</span></div><div class="tile-scrim"></div>'+
+            '<div class="tile-body"><div class="tile-title">Coming Soon</div><div class="tile-meta"><span>'+pillar.placeholder+'</span></div></div></div>'
+          : pillar.posts.map(tileHTML).join('');
+        return '<div class="mp-pillar"><p class="mp-pillar-eyebrow">'+pillar.name+'</p><p class="mp-pillar-tagline">'+pillar.tagline+'</p>'+
+          '<div class="row-scroll">'+body+'</div></div>';
+      }).join('');
+      if(m.mostViewed && m.mostViewed.length){
+        mostViewedEl.style.display = '';
+        mostViewedEl.innerHTML = '<p class="mp-most-viewed-eyebrow">Most Viewed</p><p class="mp-most-viewed-tagline">Ranked by real view count, live from Instagram</p>'+
+          '<div class="row-scroll">'+m.mostViewed.map(tileHTML).join('')+'</div>';
+      } else {
+        mostViewedEl.style.display = 'none';
+        mostViewedEl.innerHTML = '';
+      }
+    }
+
+    document.getElementById('mpCta').href = m.instagram;
+    document.getElementById('mpCta').textContent = m.reelShowcase ? 'See my full profile on Instagram ↗' : 'See more on Instagram ↗';
     var overlay = document.getElementById('moviepageOverlay');
     overlay.classList.add('open');
     overlay._trigger = document.activeElement;
     overlay.scrollTop = 0;
     document.getElementById('moviepageClose').focus();
     document.body.style.overflow = 'hidden';
+
+    if(m.reelShowcase){
+      // Only now, with the overlay actually visible, does each reel's real on-screen position
+      // mean anything — this is what lets the first couple of reels autoplay immediately while
+      // the rest wait until scrolled into view, same pattern as everywhere else on the site.
+      m.reelShowcase.forEach(function(reel){
+        initTileLoop(document.getElementById('showcase-' + reel.key), [
+          { type:'video', src:reel.videoSrc, poster:reel.poster, duration:60000 }
+        ]);
+      });
+    }
   }
 
   function closeMoviePage(){
@@ -1078,39 +1207,64 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
     if(overlay._trigger && overlay._trigger.focus) overlay._trigger.focus();
   }
 
-  document.getElementById('mpCta').addEventListener('click', function(e){
-    e.preventDefault();
-    var anchor = this.getAttribute('data-anchor');
-    closeMoviePage();
-    var target = document.getElementById(anchor);
-    if(target) setTimeout(function(){ target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' }); }, 50);
-  });
+  function openSedanaOverlay(){
+    var overlay = document.getElementById('sedanaOverlay');
+    overlay.classList.add('open');
+    overlay._trigger = document.activeElement;
+    overlay.scrollTop = 0;
+    document.getElementById('sedanaClose').focus();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSedanaOverlay(){
+    var overlay = document.getElementById('sedanaOverlay');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    if(overlay._trigger && overlay._trigger.focus) overlay._trigger.focus();
+  }
 
   document.addEventListener('click', function(e){
     var videoTile = e.target.closest('[data-video-key]');
     if(videoTile){ openVideoModal(videoTile.getAttribute('data-video-key')); return; }
+    // Reel showcase tiles play a muted preview right on the tile, but the full reel (with
+    // sound, comments, likes) lives on Instagram — sending the click there instead of an
+    // in-page modal doubles as real traffic to the account, which is the whole point.
+    var igTile = e.target.closest('[data-ig-permalink]');
+    if(igTile){ window.open(igTile.getAttribute('data-ig-permalink'), '_blank', 'noopener'); return; }
+    if(e.target.closest('#sedanaCard')){ openSedanaOverlay(); return; }
     var tile = e.target.closest('.tile');
     if(tile){ openModal(tile.getAttribute('data-key')); return; }
-    var campaignCard = e.target.closest('.campaign-card');
+    var campaignCard = e.target.closest('.campaign-card, .hero-card[data-movie]');
     if(campaignCard){ openMoviePage(campaignCard.getAttribute('data-movie')); return; }
     if(e.target === document.getElementById('modalOverlay') || e.target.closest('#modalClose')){ closeModal(); }
     if(e.target.closest('#moviepageClose')){ closeMoviePage(); }
+    if(e.target.closest('#sedanaClose')){ closeSedanaOverlay(); }
     if(e.target === document.getElementById('videoModalOverlay') || e.target.closest('#videoModalClose')){ closeVideoModal(); }
   });
   document.addEventListener('keydown', function(e){
     var focused = document.activeElement;
     var isVideoTile = focused && focused.hasAttribute && focused.hasAttribute('data-video-key');
     if(isVideoTile && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); openVideoModal(focused.getAttribute('data-video-key')); return; }
+    var isIgTile = focused && focused.hasAttribute && focused.hasAttribute('data-ig-permalink');
+    if(isIgTile && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); window.open(focused.getAttribute('data-ig-permalink'), '_blank', 'noopener'); return; }
+    var isSedanaCard = focused && focused.id === 'sedanaCard';
+    if(isSedanaCard && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); openSedanaOverlay(); return; }
     var isTile = focused && focused.classList && focused.classList.contains('tile');
     if(isTile && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); openModal(focused.getAttribute('data-key')); }
-    var isCampaignCard = focused && focused.classList && focused.classList.contains('campaign-card');
+    var isCampaignCard = focused && focused.classList && (focused.classList.contains('campaign-card') || (focused.classList.contains('hero-card') && focused.hasAttribute('data-movie')));
     if(isCampaignCard && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); openMoviePage(focused.getAttribute('data-movie')); }
-    if(e.key === 'Escape'){ closeModal(); closeMoviePage(); closeVideoModal(); }
+    if(e.key === 'Escape'){ closeModal(); closeMoviePage(); closeSedanaOverlay(); closeVideoModal(); }
   });
 
   var nav = document.getElementById('siteNav');
+  var navTicking = false;
   window.addEventListener('scroll', function(){
-    if(window.scrollY > 40) nav.classList.add('solid'); else nav.classList.remove('solid');
+    if(navTicking) return;
+    navTicking = true;
+    requestAnimationFrame(function(){
+      if(window.scrollY > 40) nav.classList.add('solid'); else nav.classList.remove('solid');
+      navTicking = false;
+    });
   }, { passive: true });
 
   document.querySelectorAll('.row-scroll').forEach(function(row){
@@ -1184,30 +1338,39 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
   function initCardMotion(){
     if(reduceMotion) return;
     var supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    document.querySelectorAll('.campaign-card, .hero-card').forEach(function(card){
+
+    // Cache the bounding rect on pointerenter (once per hover) instead of calling
+    // getBoundingClientRect() on every pointermove — that forces a synchronous
+    // layout recalc on every mouse pixel, which is a real jank source when it's
+    // firing on several cards at once. Style writes are batched into a single
+    // requestAnimationFrame per card so rapid pointermove events coalesce.
+    function bindTilt(card, opts){
+      var rect = null, pending = null;
+      card.addEventListener('pointerenter', function(){ rect = card.getBoundingClientRect(); });
       card.addEventListener('pointermove', function(e){
-        var r = card.getBoundingClientRect();
-        var px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
-        card.style.setProperty('--mx', (px * 100) + '%');
-        card.style.setProperty('--my', (py * 100) + '%');
-        if(supportsHover && card.classList.contains('campaign-card')){
-          var tiltX = (py - 0.5) * -6, tiltY = (px - 0.5) * 8;
-          card.style.transition = 'transform .35s cubic-bezier(.16,1,.3,1)';
-          card.style.transform = 'perspective(900px) rotateX(' + tiltX + 'deg) rotateY(' + tiltY + 'deg)';
-        }
+        if(!rect) rect = card.getBoundingClientRect();
+        var clientX = e.clientX, clientY = e.clientY;
+        if(pending) return;
+        pending = requestAnimationFrame(function(){
+          pending = null;
+          var px = (clientX - rect.left) / rect.width, py = (clientY - rect.top) / rect.height;
+          if(opts.glow){ card.style.setProperty('--mx', (px * 100) + '%'); card.style.setProperty('--my', (py * 100) + '%'); }
+          if(opts.tilt){
+            var tiltX = (py - 0.5) * opts.tiltX, tiltY = (px - 0.5) * opts.tiltY;
+            card.style.transition = 'transform ' + opts.duration + ' cubic-bezier(.16,1,.3,1)';
+            card.style.transform = 'perspective(' + opts.perspective + 'px) rotateX(' + tiltX + 'deg) rotateY(' + tiltY + 'deg)';
+          }
+        });
       });
-      card.addEventListener('pointerleave', function(){ card.style.transform = ''; });
+      card.addEventListener('pointerleave', function(){ rect = null; card.style.transform = ''; });
+    }
+
+    document.querySelectorAll('.campaign-card, .hero-card').forEach(function(card){
+      bindTilt(card, { glow: true, tilt: supportsHover && card.classList.contains('campaign-card'), tiltX: -6, tiltY: 8, perspective: 900, duration: '.35s' });
     });
     if(supportsHover){
       document.querySelectorAll('.loop-step, .astat, .bstat').forEach(function(card){
-        card.addEventListener('pointermove', function(e){
-          var r = card.getBoundingClientRect();
-          var px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
-          var tiltX = (py - 0.5) * -4, tiltY = (px - 0.5) * 4;
-          card.style.transition = 'transform .3s cubic-bezier(.16,1,.3,1)';
-          card.style.transform = 'perspective(700px) rotateX(' + tiltX + 'deg) rotateY(' + tiltY + 'deg)';
-        });
-        card.addEventListener('pointerleave', function(){ card.style.transform = ''; });
+        bindTilt(card, { glow: false, tilt: true, tiltX: -4, tiltY: 4, perspective: 700, duration: '.3s' });
       });
     }
   }
@@ -1262,13 +1425,28 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
     var links = Array.prototype.slice.call(document.querySelectorAll('.nav-links a[href^="#"]'));
     var sections = links.map(function(a){ return document.querySelector(a.getAttribute('href')); }).filter(Boolean);
     if(!sections.length) return;
+    // offsetTop forces a synchronous layout read; doing that for every linked section on every
+    // single scroll event, with no throttling, was a real and significant source of scroll jank
+    // that ran the entire length of the page (this handler never unregisters). Cache the offsets
+    // once (and again on resize, since layout can change), and only recompute which link is
+    // active inside a throttled rAF instead of on every raw scroll tick.
+    function cacheOffsets(){
+      return sections.map(function(sec){ return sec.offsetTop; });
+    }
+    var offsets = cacheOffsets();
     function onScroll(){
       var pos = window.scrollY + 120;
       var current = sections[0];
-      sections.forEach(function(sec){ if(sec.offsetTop <= pos) current = sec; });
+      sections.forEach(function(sec, i){ if(offsets[i] <= pos) current = sec; });
       links.forEach(function(a){ a.classList.toggle('active-link', a.getAttribute('href') === '#' + current.id); });
     }
-    window.addEventListener('scroll', onScroll, { passive: true });
+    var navSpyTicking = false;
+    window.addEventListener('scroll', function(){
+      if(navSpyTicking) return;
+      navSpyTicking = true;
+      requestAnimationFrame(function(){ onScroll(); navSpyTicking = false; });
+    }, { passive: true });
+    window.addEventListener('resize', function(){ offsets = cacheOffsets(); });
     onScroll();
   }
 
@@ -1290,14 +1468,23 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
       var height = h.scrollHeight - h.clientHeight;
       bar.style.width = (height > 0 ? (scrolled / height) * 100 : 0) + '%';
     }
-    window.addEventListener('scroll', update, { passive: true });
+    var progressTicking = false;
+    window.addEventListener('scroll', function(){
+      if(progressTicking) return;
+      progressTicking = true;
+      requestAnimationFrame(function(){ update(); progressTicking = false; });
+    }, { passive: true });
     window.addEventListener('resize', update);
     update();
   }
 
   function initDragScroll(){
     if(!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-    document.querySelectorAll('.row-scroll').forEach(function(row){
+    // #sedanaClipsRow is excluded entirely: raising the movement threshold wasn't enough to
+    // stop this from occasionally swallowing real clicks on its 3 tiles, and that row only
+    // ever holds 3 items in a fixed-width overlay — native scrolling covers it fine without
+    // needing custom drag-to-scroll at all, so it's simplest to just not attach this here.
+    document.querySelectorAll('.row-scroll:not(#sedanaClipsRow)').forEach(function(row){
       var isDown = false, startX = 0, startScroll = 0, moved = false;
       row.addEventListener('pointerdown', function(e){
         isDown = true; moved = false; startX = e.clientX; startScroll = row.scrollLeft; row.classList.add('dragging');
@@ -1305,7 +1492,11 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
       window.addEventListener('pointermove', function(e){
         if(!isDown) return;
         var dx = e.clientX - startX;
-        if(Math.abs(dx) > 4) moved = true;
+        // 10px, not 4: a plain trackpad click commonly drifts a few px between press and
+        // release, which at 4px was enough to misclassify an ordinary click on a tile as a
+        // drag and swallow it via the capture-phase handler below — exactly why clicking the
+        // Sedana clip tiles (inside a .row-scroll) did nothing.
+        if(Math.abs(dx) > 10) moved = true;
         row.scrollLeft = startScroll - dx;
       });
       window.addEventListener('pointerup', function(){
@@ -1342,6 +1533,39 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
   initScrollProgress();
   initDragScroll();
   initIntroBeat();
+
+  // ---------- Autoplay safety net ----------
+  // Some browsers/power-saving modes (notably iOS/mac Safari with Low Power Mode
+  // or Auto-Play set to "Never") silently block muted autoplay entirely, leaving
+  // background videos frozen on their first frame. Any real tap/scroll is a genuine
+  // user gesture, so use it to retry — but only for videos actually on screen right
+  // now, so this can't kick off every video on the page at once; each tile's own
+  // IntersectionObserver (in initTileLoop) still owns pausing things that scroll
+  // back out of view. Not `{once:true}`: this needs to keep working as the visitor
+  // scrolls to new sections throughout the whole visit, not just on the first tap.
+  function unstickAutoplayVideos(){
+    document.querySelectorAll('video[autoplay]').forEach(function(v){
+      if(!v.paused) return;
+      var r = v.getBoundingClientRect();
+      if(r.height <= 0) return;
+      // Match the same "needs to actually dominate the screen" bar as the IntersectionObserver
+      // (threshold 0.6) instead of "any pixel overlaps the viewport" — otherwise this safety
+      // net is exactly what starts the next page's video while it's still just peeking in from
+      // the bottom edge.
+      var visibleHeight = Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0);
+      var visibleRatio = Math.max(0, visibleHeight) / r.height;
+      if(visibleRatio >= 0.6) v.play().catch(function(){});
+    });
+  }
+  var unstickTicking = false;
+  function scheduleUnstick(){
+    if(unstickTicking) return;
+    unstickTicking = true;
+    requestAnimationFrame(function(){ unstickAutoplayVideos(); unstickTicking = false; });
+  }
+  ['pointerdown','touchstart','scroll'].forEach(function(evt){
+    document.addEventListener(evt, scheduleUnstick, { passive: true });
+  });
 })();
 </script>
 </body>
