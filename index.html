@@ -1025,7 +1025,10 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
       insight:"No dialogue, no CTA, just pure relatability. Over 4,000 shares suggests it traveled through DMs more than the algorithm." },
     { key:'reel-twin', title:"Top Experiences We Gotta Have, Twin", views:"628.8K", videoSrc:'videos/personal-twin.mp4', poster:'images/posters/personal-twin-poster.jpg', permalink:'https://www.instagram.com/reel/DXsFIYiiIgI/',
       insight:"23.2K shares on 628K views, one of the highest share rates on the account. Listicle-style relatable content travels because everyone tags the friend who needs to see it." },
-    { key:'reel-itbelike', title:"It Really Be Like That", views:"480.9K", videoSrc:'videos/personal-itbelike.mp4', poster:'images/posters/personal-itbelike-poster.jpg', permalink:'https://www.instagram.com/reel/DXw6B-JoA8Q/',
+    // Instagram doesn't expose a downloadable video file for this one (checked three times,
+    // thumbnail is all the API returns) — falls back to a static poster instead of a broken
+    // video reference; still fully clickable through to the real reel.
+    { key:'reel-itbelike', title:"It Really Be Like That", views:"480.9K", poster:'images/posters/personal-itbelike-poster.jpg', permalink:'https://www.instagram.com/reel/DXw6B-JoA8Q/',
       insight:"A pure reaction-format joke, no explanation needed. Nearly 6,000 shares on a one-line caption shows the footage did all the work." },
     { key:'reel-fuel', title:"The Most Expensive Place I Know", views:"399.1K", videoSrc:'videos/personal-fuel.mp4', poster:'images/posters/personal-fuel-poster.jpg', permalink:'https://www.instagram.com/reel/DYXen8qI4nj/',
       insight:"Fuel prices are a universal frustration right now. Almost 11,000 shares off a single relatable complaint, proof a shared pain point travels faster than car content alone." },
@@ -1142,7 +1145,9 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
           return '<div class="reel-item">'+
             '<div class="reel-media">'+
               '<div class="reel-rank">#'+(i+1)+'</div>'+
-              '<div class="tile-video" id="showcase-'+reel.key+'" data-ig-permalink="'+reel.permalink+'" role="button" tabindex="0" aria-label="'+reel.title+', watch the full reel on Instagram"></div>'+
+              (reel.videoSrc
+                ? '<div class="tile-video" id="showcase-'+reel.key+'" data-ig-permalink="'+reel.permalink+'" role="button" tabindex="0" aria-label="'+reel.title+', watch the full reel on Instagram"></div>'
+                : '<div class="tile-img" style="background-image:url('+reel.poster+')" data-ig-permalink="'+reel.permalink+'" role="button" tabindex="0" aria-label="'+reel.title+', watch the full reel on Instagram"></div>')+
             '</div>'+
             '<div class="reel-copy">'+
               '<p class="reel-views">'+reel.views+' <span>views</span></p>'+
@@ -1193,6 +1198,7 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
       // mean anything — this is what lets the first couple of reels autoplay immediately while
       // the rest wait until scrolled into view, same pattern as everywhere else on the site.
       m.reelShowcase.forEach(function(reel){
+        if(!reel.videoSrc) return;
         initTileLoop(document.getElementById('showcase-' + reel.key), [
           { type:'video', src:reel.videoSrc, poster:reel.poster, duration:60000 }
         ]);
