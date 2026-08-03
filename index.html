@@ -133,6 +133,12 @@ a { color: inherit; }
 .hero-card { position: relative; border-radius: 18px; overflow: hidden; min-height: 82vh; display: flex; align-items: flex-end; background: #050403; box-shadow: 0 30px 60px var(--shadow); cursor: pointer; }
 @media (max-width: 780px) { .hero-card { min-height: 90vh; border-radius: 12px; } }
 .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #050403; }
+.hero-kenburns { background-position: center 30%; background-size: 112% auto; background-repeat: no-repeat; animation: heroKenBurns 22s ease-in-out infinite alternate; }
+@keyframes heroKenBurns {
+  0% { background-size: 112% auto; background-position: center 26%; }
+  100% { background-size: 128% auto; background-position: center 40%; }
+}
+@media (prefers-reduced-motion: reduce) { .hero-kenburns { animation: none; background-size: 116% auto; } }
 .hero-scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,4,3,0.97) 4%, rgba(5,4,3,0.6) 42%, rgba(5,4,3,0.12) 72%), linear-gradient(to right, rgba(5,4,3,0.8) 0%, rgba(5,4,3,0.1) 58%); }
 .hero-glow { position: absolute; inset: -20% -10% auto auto; width: 60%; height: 70%; background: radial-gradient(circle at 70% 30%, var(--accent-soft), transparent 65%); pointer-events: none; }
 .hero-content { position: relative; padding: 60px 56px 54px; max-width: 700px; }
@@ -444,7 +450,7 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
 
   <div class="hero" id="personal-work">
     <div class="hero-card" id="personalHeroCard" data-movie="personal" tabindex="0" role="button" aria-label="Open Built From Zero (@tedkyarieh_) case study">
-      <div class="hero-video" id="personalHeroVideo" aria-hidden="true"></div>
+      <div class="hero-video hero-kenburns" id="personalHeroVideo" aria-hidden="true" style="background-image:url('images/personal-hero-bts.jpg');"></div>
       <div class="hero-glow"></div>
       <div class="hero-scrim"></div>
       <div class="hero-content">
@@ -460,9 +466,6 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
           <a class="btn-play" href="#" onclick="event.preventDefault()">&#9654; View My Work</a>
           <a class="btn-info" href="#skills" onclick="event.stopPropagation()">&#43; Capabilities</a>
         </div>
-      </div>
-      <div class="hero-controls">
-        <button class="hero-playtoggle" id="personalHeroPlayToggle" aria-label="Pause background video" onclick="event.stopPropagation()">&#10073;&#10073;</button>
       </div>
     </div>
   </div>
@@ -814,14 +817,6 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
       '<div class="mp-step"><p class="act">'+step.act+'</p><h3>'+step.h+'</h3><p>'+step.p+'</p></div>');
   });
 
-  // ---------- Personal hero background loop (best-performing @tedkyarieh_ reels) ----------
-  var PERSONAL_LOOP = [
-    { type:'video', src:'videos/personal-1.mp4', duration:5000 },
-    { type:'video', src:'videos/personal-2.mp4', duration:5000 },
-    { type:'video', src:'videos/personal-3.mp4', duration:5000 },
-    { type:'video', src:'videos/personal-4.mp4', duration:5000 }
-  ];
-
   function initTileLoop(container, playlist){
     if(!container || !playlist || !playlist.length) return null;
     var layerA = document.createElement('div'); layerA.className = 'tile-loop-layer active';
@@ -916,6 +911,11 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
     var initialRect = container.getBoundingClientRect();
     var inView = initialRect.top < window.innerHeight && initialRect.bottom > 0;
     var paused = false;
+    // Fire the first play() attempt right here, synchronously, instead of waiting on the
+    // IntersectionObserver's callback (which the browser schedules asynchronously after the
+    // next paint). Without this, the hero videos sat fully buffered but paused until a scroll
+    // or click nudged them via the unstickAutoplayVideos safety net further down the page.
+    if(inView) v.play().catch(function(){});
     if('IntersectionObserver' in window){
       new IntersectionObserver(function(entries){
         entries.forEach(function(entry){
@@ -935,12 +935,12 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
   initStaticVideo(document.getElementById('authorityVideo'));
 
   // ---------- Hero background video (Mascardi — plays in full, single clip) ----------
+  // The Personal hero tile now uses a static Ken Burns image background instead of a video
+  // loop (see .hero-kenburns), so it has no play/pause toggle to wire up.
   var heroLoopCtrl = initStaticVideo(document.getElementById('heroVideo'));
-  var personalHeroLoopCtrl = initTileLoop(document.getElementById('personalHeroVideo'), PERSONAL_LOOP);
 
-  // Both big hero tiles (Mascardi + Personal) use the same play/pause pattern: reflect the
-  // video's real paused state rather than an assumed one, so the button never gets stuck out
-  // of sync with the video (see [[portfolio_video_redesign]] toggle-bug fix).
+  // Reflects the video's real paused state rather than an assumed one, so the button never
+  // gets stuck out of sync with the video (see [[portfolio_video_redesign]] toggle-bug fix).
   function wireHeroToggle(videoContainerId, toggleId, loopCtrl){
     var toggle = document.getElementById(toggleId);
     function sync(){
@@ -960,7 +960,6 @@ footer.contact a:hover, footer.contact a:focus-visible { color: var(--gold); bor
     });
   }
   wireHeroToggle('heroVideo', 'heroPlayToggle', heroLoopCtrl);
-  wireHeroToggle('personalHeroVideo', 'personalHeroPlayToggle', personalHeroLoopCtrl);
 
   // ---------- Modal (shared by episode tiles + ranked items) ----------
   function openModal(key){
